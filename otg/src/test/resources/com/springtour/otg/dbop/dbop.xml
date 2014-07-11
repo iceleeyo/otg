@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+    
+  
+    
+    <bean name="otg.ChannelDataPrepareOperationDao"
+		class="com.springtour.otg.dbop.DataPrepareOperationDao">
+        <property name="sqlMapClientTemplate"
+			ref="sqlMapClientTemplate" />
+        <property name="nameSpace"
+			value="com/springtour/otg/dbop/ChannelDataPrepareOperationDaoSqlMap" />
+    </bean>
+    
+    <bean name="otg.GatewayDataPrepareOperationDao"
+		class="com.springtour.otg.dbop.DataPrepareOperationDao">
+        <property name="sqlMapClientTemplate"
+			ref="sqlMapClientTemplate" />
+        <property name="nameSpace"
+			value="com/springtour/otg/dbop/GatewayDataPrepareOperationDaoSqlMap" />
+    </bean>
+    
+    <bean name="otg.MerchantDataPrepareOperationDao"
+		class="com.springtour.otg.dbop.DataPrepareOperationDao">
+        <property name="sqlMapClientTemplate"
+			ref="sqlMapClientTemplate" />
+        <property name="nameSpace"
+			value="com/springtour/otg/dbop/MerchantDataPrepareOperationDaoSqlMap" />
+    </bean>
+    
+    <bean name="otg.PartnerDataPrepareOperationDao"
+		class="com.springtour.otg.dbop.DataPrepareOperationDao">
+        <property name="sqlMapClientTemplate"
+			ref="sqlMapClientTemplate" />
+        <property name="nameSpace"
+			value="com/springtour/otg/dbop/PartnerDataPrepareOperationDaoSqlMap" />
+    </bean>
+    
+    <bean name="otg.RecommendedGatewayDataPrepareOperationDao"
+		class="com.springtour.otg.dbop.DataPrepareOperationDao">
+        <property name="sqlMapClientTemplate"
+			ref="sqlMapClientTemplate" />
+        <property name="nameSpace"
+			value="com/springtour/otg/dbop/RecommendedGatewayDataPrepareOperationDaoSqlMap" />
+    </bean>
+    
+    <bean name="otg.TransactionDataPrepareOperationDao"
+		class="com.springtour.otg.dbop.DataPrepareOperationDao">
+        <property name="sqlMapClientTemplate"
+			ref="sqlMapClientTemplate" />
+        <property name="nameSpace"
+			value="com/springtour/otg/dbop/TransactionDataPrepareOperationDaoSqlMap" />
+    </bean>
+    
+    <bean name="otg.NotificationDataPrepareOperationDao"
+		class="com.springtour.otg.dbop.DataPrepareOperationDao">
+        <property name="sqlMapClientTemplate"
+			ref="sqlMapClientTemplate" />
+        <property name="nameSpace"
+			value="com/springtour/otg/dbop/NotificationDataPrepareOperationDaoSqlMap" />
+    </bean>
+    
+    <bean name="otg.DataReader"
+		class="com.springtour.otg.dbop.DataReader">
+    </bean>
+
+</beans>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap
+	namespace="com/springtour/otg/infrastructure/persistence/ibatis/MerchantRepositorySqlMap">
+	<resultMap id="findResultMap"
+		class="com.springtour.otg.domain.model.merchant.Merchant">
+		<result property="id" column="id" />
+		<result property="version" column="version" />
+		<result property="name" column="merchant_name" />
+		<result property="code" column="merchant_code" />
+		<result property="orgId" column="merchant_branch_id" />
+		<result property="channel.id" column="merchant_channel" />
+		<result property="holder" column="merchant_holder" />
+		<result property="key" column="merchant_key" />
+		<result property="state" column="enabled" />
+	</resultMap>
+
+	<sql id="findColumns">
+		m.id, m.merchant_name, m.merchant_code, m.merchant_branch_id,
+		m.merchant_channel, m.merchant_holder, m.merchant_key,
+		m.enabled,m.version
+	</sql>
+
+	<select id="findByChannelAndOrg" parameterClass="java.util.HashMap"
+		resultMap="findResultMap">
+		select
+		<include refid="findColumns" />
+		from t_merchant m where m.merchant_channel = #channelId# and
+		m.merchant_branch_id = #orgId#
+	</select>
+
+
+	<select id="findKeyByCode" parameterClass="java.util.HashMap"
+		resultMap="findResultMap">
+		select
+		<include refid="findColumns" />
+		from t_merchant m where m.MERCHANT_CODE=#merchantCode# and
+		m.MERCHANT_CHANNEL=#channelId# and m.ENABLED=1
+	</select>
+
+	<select id="findById" parameterClass="java.lang.String"
+		resultMap="findResultMap">
+		select
+		<include refid="findColumns" />
+		from t_merchant m where m.id=#id#
+	</select>
+
+	<insert id="saveAggregateRoot"
+		parameterClass="com.springtour.otg.domain.model.merchant.Merchant">
+		<selectKey resultClass="java.lang.Long" keyProperty="id"
+			type="pre">
+			select SEQ_OTG_merchant.NEXTVAL as id from dual
+		</selectKey>
+		insert into t_merchant (id, merchant_name, merchant_code,
+		merchant_branch_id, merchant_channel, merchant_key, enabled)
+		values (#id#, #name#, #code#, #orgId#, #channel.id#, #key#,
+		#state#)
+	</insert>
+
+	<update id="updateAggregateRoot"
+		parameterClass="com.springtour.otg.domain.model.merchant.Merchant">
+		update t_merchant set MERCHANT_NAME = #name#, MERCHANT_CODE =
+		#code#, MERCHANT_KEY = #key#, ENABLED = #state#, version =
+		version + 1 where id = #id# and version = #version#
+	</update>
+
+	<sql id="listWhereClause">
+		<dynamic prepend="where">
+			<isNotEmpty property="channelId" prepend="and">
+				m.merchant_channel = #channelId#
+			</isNotEmpty>
+			<isNotEmpty property="orgId" prepend="and">
+				 m.merchant_branch_id = #orgId#
+			</isNotEmpty>
+		</dynamic>
+	</sql>
+
+	<select id="count" parameterClass="java.util.HashMap"
+		resultClass="java.lang.Long">
+		select count(0) from t_merchant m
+		<include refid="listWhereClause" />
+	</select>
+
+	<select id="list" parameterClass="java.util.HashMap" resultMap="findResultMap">
+		SELECT * FROM (SELECT t.*,ROWNUM rn FROM ( select
+		<include refid="findColumns" />
+		from t_merchant m
+		<include refid="listWhereClause" />
+		order by merchant_channel, id
+		<![CDATA[
+				) t WHERE ROWNUM < #firstResult# + #maxResults#)WHERE rn >= #firstResult#
+			]]>
+	</select>
+</sqlMap>

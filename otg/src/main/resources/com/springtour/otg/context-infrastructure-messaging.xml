@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:jms="http://www.springframework.org/schema/jms" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-2.5.xsd">
+
+
+	<bean id="otg.NotificationReceivedQueue" class="org.apache.activemq.command.ActiveMQQueue">
+		<!-- 设置消息队列的名字 -->
+		<constructor-arg index="0"
+			value="${otg.notification.message.queue}" />
+	</bean>
+
+	<bean id="otg.CheckingQueue" class="org.apache.activemq.command.ActiveMQQueue">
+		<!-- 设置消息队列的名字 -->
+		<constructor-arg index="0" value="${otg.jms.checking.queue}" />
+	</bean>
+	
+	<bean id="otg.DeadSpottedQueue" class="org.apache.activemq.command.ActiveMQQueue">
+		<!-- 设置消息队列的名字 -->
+		<constructor-arg index="0" value="${otg.jms.deadSpotted.queue}" />
+	</bean>
+	
+	<bean id="otg.InvalidSpottedQueue" class="org.apache.activemq.command.ActiveMQQueue">
+		<!-- 设置消息队列的名字 -->
+		<constructor-arg index="0" value="${otg.jms.invalidSpotted.queue}" />
+	</bean>
+
+	<bean id="otg.JmsApplicationEventsImpl"
+		class="com.springtour.otg.infrastructure.messaging.JmsApplicationEventsImpl">
+		<property name="jmsTemplate" ref="jmsTemplate" />
+		<property name="notificationReceivedQueue" ref="otg.NotificationReceivedQueue" />
+		<property name="qName" value="${otg.notification.message.queue}" />
+		<property name="mqSendFailedMessageRepository" ref="otg.IBatisMqSendFailedMessageRepositoryImpl" />
+	</bean>
+
+	<bean id="otg.JmsCheckingEventsImpl"
+		class="com.springtour.otg.infrastructure.messaging.JmsTransactionCheckingEventsImpl">
+		<property name="jmsTemplate" ref="jmsTemplate" />
+		<property name="checkingQueue" ref="otg.CheckingQueue" />
+		<property name="deadSpottedQueue" ref="otg.DeadSpottedQueue"/>
+		<property name="invalidSpottingQueue" ref="otg.InvalidSpottedQueue"/>
+	</bean>
+
+
+
+	<bean id="otg.NotificationReceivedConsumer"
+		class="com.springtour.otg.infrastructure.messaging.NotificationReceivedConsumer">
+		<property name="jmsTemplate" ref="jmsTemplate" />
+		<property name="responseProcedure" ref="otg.ResponseProcedure" />
+	</bean>
+
+	<bean id="otg.CheckingConsumer"
+		class="com.springtour.otg.infrastructure.messaging.CheckingConsumer">
+		<property name="checkTransactionService" ref="otg.CheckTransactionServiceImpl" />
+	</bean>
+	
+	<bean id="otg.SpottingDeadConsumer"
+		class="com.springtour.otg.infrastructure.messaging.SpottingDeadConsumer">
+		<property name="checkTransactionService" ref="otg.CheckTransactionServiceImpl" />
+	</bean>
+	
+	<bean id="otg.SpottingInvalidConsumer"
+		class="com.springtour.otg.infrastructure.messaging.SpottingInvalidConsumer">
+		<property name="mailManager" ref="otg.MailManager" />
+	</bean>
+</beans>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap
+	namespace="com/springtour/otg/dbop/RecommendedGatewayDataPrepareOperationDaoSqlMap">
+
+    <delete id="clear">
+               delete from t_otg_partner_recommended
+    </delete>
+        
+    <delete id="clearData">
+               delete from t_otg_partner_recommended where partner_id =#partner_id#
+    </delete>
+        
+    <insert id="createData" parameterClass="java.util.Map">
+            insert into t_otg_partner_recommended
+  (partner_id, channel, gateway, priority)
+values
+  (#partner_id#, #channel#, #gateway#, #priority#)
+    </insert>
+</sqlMap>

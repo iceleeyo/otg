@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap
+	namespace="com/springtour/otg/dbop/MerchantDataPrepareOperationDaoSqlMap">
+
+	<delete id="clear">
+               delete from chunqiu3.t_merchant
+        </delete>
+        
+        <delete id="clearData">
+               delete from chunqiu3.t_merchant where merchant_channel=#merchant_channel#
+               and merchant_code = #merchant_code#
+        </delete>
+        
+        <insert id="createData" parameterClass="java.util.Map">
+            <selectKey resultClass="java.lang.Long" keyProperty="id"
+                    type="pre">
+                    select CHUNQIU3.SEQ_OTG_merchant.NEXTVAL as id from dual
+            </selectKey>
+            insert into t_merchant (id, merchant_name, merchant_code,
+            merchant_branch_id, merchant_channel, merchant_key, enabled, MERCHANT_HOLDER)
+            values (#id#, #merchant_name#, #merchant_code#, #merchant_branch_id#,
+            #merchant_channel#, #merchant_key#,#enabled#, #MERCHANT_HOLDER#)
+        </insert>
+</sqlMap>
+

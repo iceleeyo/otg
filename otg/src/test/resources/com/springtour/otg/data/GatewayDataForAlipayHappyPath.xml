@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="GBK"?>
+
+<!--
+    Document   : GatewayDataForAlipayHappyPath.xml
+    Created on : February 22, 2012, 4:19 PM
+    Author     : 005073
+    Description:
+        Purpose of the document follows.
+-->
+
+<root>
+    <data>
+        <CHANNEL_ID>7</CHANNEL_ID>
+        <CODE>CCB</CODE>
+        <DIALECT>CCB</DIALECT>
+        <PRIORITY>0</PRIORITY>
+    </data>
+</root>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap
+	namespace="com/springtour/otg/infrastructure/persistence/ibatis/ChannelRepositorySqlMap">
+
+    
+
+    <resultMap id="channelResultMap"
+		class="com.springtour.otg.domain.model.channel.Channel">
+        <result property="id" column="id" />
+        <result property="version" column="version" />
+        <result property="name" column="name" />
+        <result property="gateways" column="id" select="com/springtour/otg/infrastructure/persistence/ibatis/ChannelRepositorySqlMap.findGateways"/>
+        <result property="availableCurrencies" column="available_currencies" />
+    </resultMap>    
+    
+    <sql id="find">
+		select c.id, c.version, c.name, c.available_currencies
+                from t_otg_channel c                
+    </sql>
+    
+    <select id="findById" parameterClass="java.lang.String"
+		resultMap="channelResultMap">
+        <include refid="find"/>
+                where c.id = #channelId#
+                order by to_number(c.id)
+    </select>
+    
+    <select id="findAll" parameterClass="java.lang.String"
+		resultMap="channelResultMap">
+        <include refid="find"/>
+        order by to_number(c.id)
+    </select>
+    
+    <resultMap id="gatewayResultMap"
+		class="com.springtour.otg.domain.model.channel.Gateway">
+        <result property="code" column="code" />
+        <result property="dialect" column="dialect" />
+        <result property="priority" column="priority" />
+    </resultMap>
+   
+    <select id="findGateways" parameterClass="java.lang.String"
+		resultMap="gatewayResultMap">
+		select g.code, g.dialect, g.priority
+                from t_otg_gateway g 
+                where g.channel_id = #channelId#
+                order by g.priority
+    </select>
+    
+    <insert id="save"
+		parameterClass="com.springtour.otg.domain.model.channel.Channel">
+		insert into t_otg_channel(id, version, name, available_Currencies)
+                values(#id#, #version#, #name#, #availableCurrencies#)
+    </insert>
+    
+    <update id="update"
+		parameterClass="com.springtour.otg.domain.model.channel.Channel">
+		update t_otg_channel set version = version + 1      
+        <isEqual property="availableCurrenciesUpdated" compareValue="true" prepend=",">
+                    available_currencies=#availableCurrencies#
+        </isEqual>
+                    where id = #id# and version = #version#
+    </update>
+    
+    <delete id="removeGateways"
+		parameterClass="com.springtour.otg.domain.model.channel.Channel">
+		delete from t_otg_gateway 
+		where channel_id = #id#
+    </delete>
+    
+    <update id="saveGateways"
+		parameterClass="java.util.HashMap">
+		insert into t_otg_gateway  (channel_id, code, dialect, priority)
+                values (#channelId# ,#gateway.code#, #gateway.dialect#, #priority#)
+    </update>
+</sqlMap>

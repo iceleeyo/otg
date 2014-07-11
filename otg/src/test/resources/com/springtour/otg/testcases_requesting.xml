@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+    
+    <bean name="otg.GivesAllForGenericRequestingHappyPath"
+		class="com.springtour.otg.dbop.DataPrepareOperation">
+        <property name="dataReader"
+			ref="otg.DataReader" />
+        <property name="appendDataFilePath">
+            <list>
+                <value>/com/springtour/otg/data/GivesAllForGenericRequestingHappyPath-partner.xml</value>
+                <value>/com/springtour/otg/data/GivesAllForGenericRequestingHappyPath-recommendedGateways.xml</value>
+                <value>/com/springtour/otg/data/ChannelAdmin-channel.xml</value>
+                <value>/com/springtour/otg/data/ChannelAdmin-gateway.xml</value>
+            </list>
+        </property>
+        <property name="appendDao">
+            <list>
+                <ref bean="otg.PartnerDataPrepareOperationDao"/>
+                <ref bean="otg.RecommendedGatewayDataPrepareOperationDao"/>
+                <ref bean="otg.ChannelDataPrepareOperationDao"/>
+                <ref bean="otg.GatewayDataPrepareOperationDao"/>
+            </list>
+        </property>
+    </bean>
+    
+    <bean name="otg.Bill99RequestHappyPath"
+		class="com.springtour.otg.dbop.DataPrepareOperation">
+        <property name="dataReader"
+			ref="otg.DataReader" />
+        <property name="dataFilePath">
+            <list>
+                <value>/com/springtour/otg/data/PartnerDataForBill99HappyPath.xml</value>
+                <value>/com/springtour/otg/data/GivesBill99.xml</value>
+                <value>/com/springtour/otg/data/GivesAllGateways-bill99.xml</value>
+            </list>
+        </property>
+        <property name="dao">
+            <list>
+                <ref bean="otg.PartnerDataPrepareOperationDao"/>
+                <ref bean="otg.ChannelDataPrepareOperationDao"/>
+                <ref bean="otg.GatewayDataPrepareOperationDao"/>
+            </list>
+        </property>
+        <property name="appendDataFilePath">
+            <list>
+                <value>/com/springtour/otg/data/GivesMerchant-bill99.xml</value>
+            </list>
+        </property>
+        <property name="appendDao">
+            <list>
+                <ref bean="otg.MerchantDataPrepareOperationDao"/>
+            </list>
+        </property>
+    </bean>
+    
+    <bean name="otg.ChinapnrRequestHappyPath"
+		class="com.springtour.otg.dbop.DataPrepareOperation">
+        <property name="dataReader"
+			ref="otg.DataReader" />
+        <property name="dataFilePath">
+            <list>
+                <value>/com/springtour/otg/data/PartnerDataForChinapnrHappyPath.xml</value>
+                <value>/com/springtour/otg/data/GivesChinapnr.xml</value>
+                <value>/com/springtour/otg/data/GivesAllGateways-chinapnr.xml</value>
+            </list>
+        </property>
+        <property name="dao">
+            <list>
+                <ref bean="otg.PartnerDataPrepareOperationDao"/>
+                <ref bean="otg.ChannelDataPrepareOperationDao"/>
+                <ref bean="otg.GatewayDataPrepareOperationDao"/>
+            </list>
+        </property>
+        <property name="appendDataFilePath">
+            <list>
+                <value>/com/springtour/otg/data/GivesMerchant-chinapnr.xml</value>
+            </list>
+        </property>
+        <property name="appendDao">
+            <list>
+                <ref bean="otg.MerchantDataPrepareOperationDao"/>
+            </list>
+        </property>
+    </bean>
+
+</beans>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMapConfig      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+    <settings cacheModelsEnabled="false" enhancementEnabled="true"
+		lazyLoadingEnabled="true" errorTracingEnabled="true"
+		maxRequests="1024" maxSessions="256" maxTransactions="32"
+		useStatementNamespaces="true" />
+
+
+    <!-- otg -->
+    <sqlMap
+		resource="com/springtour/otg/infrastructure/persistence/ibatis/ChannelRepositorySqlMap.xml" />
+    <sqlMap
+		resource="com/springtour/otg/infrastructure/persistence/ibatis/PartnerRepositorySqlMap.xml" />
+    <sqlMap
+		resource="com/springtour/otg/infrastructure/persistence/ibatis/MerchantRepositorySqlMap.xml" />
+    <sqlMap
+		resource="com/springtour/otg/infrastructure/persistence/ibatis/TransactionRepositorySqlMap.xml" />
+    <sqlMap
+		resource="com/springtour/otg/infrastructure/persistence/ibatis/NotificationRepositorySqlMap.xml" />
+    <sqlMap
+		resource="com/springtour/otg/infrastructure/persistence/ibatis/ClockSqlMap.xml" />
+    <!-- test -->
+    <sqlMap
+		resource="com/springtour/otg/dbop/ChannelDataPrepareOperationDaoSqlMap.xml" />
+    <sqlMap
+		resource="com/springtour/otg/dbop/GatewayDataPrepareOperationDaoSqlMap.xml" />
+    <sqlMap
+		resource="com/springtour/otg/dbop/MerchantDataPrepareOperationDaoSqlMap.xml" />
+    <sqlMap
+		resource="com/springtour/otg/dbop/PartnerDataPrepareOperationDaoSqlMap.xml" />
+    <sqlMap
+		resource="com/springtour/otg/dbop/RecommendedGatewayDataPrepareOperationDaoSqlMap.xml" />                   
+    <sqlMap
+		resource="com/springtour/otg/dbop/TransactionDataPrepareOperationDaoSqlMap.xml" />
+    <sqlMap
+		resource="com/springtour/otg/dbop/NotificationDataPrepareOperationDaoSqlMap.xml" />
+    <sqlMap
+		resource="com/springtour/otg/infrastructure/persistence/ibatis/MqSendFailedMessageRepositorySqlMap.xml" />
+    <!-- test -->
+</sqlMapConfig>

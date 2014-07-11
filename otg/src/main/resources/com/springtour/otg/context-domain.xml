@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<bean id="otg.TransactionFactory"
+		class="com.springtour.otg.domain.model.transaction.TransactionFactory">
+		<property name="transactionRepository" ref="otg.IBatisTransactionRepositoryImpl" />
+		<property name="merchantRepository" ref="otg.IBatisMerchantRepositoryImpl" />
+		<property name="channelRepository" ref="otg.IBatisChannelRepositoryImpl" />
+		<property name="makePaymentService" ref="otg.PaymentDispatcher" />
+		<property name="partnerRepository" ref="otg.IBatisPartnerRepositoryImpl" />
+		<property name="transactionNoGenerator" ref="otg.ChannelDispatcher" />
+		<property name="clock" ref="otg.IBatisClockImpl" />
+	</bean>
+
+	<bean id="otg.ConfigurableTransactionValidationSpecificationsImpl"
+		class="com.springtour.otg.domain.model.transaction.ConfigurableTransactionValidationSpecificationsImpl">
+		<property name="configurations" ref="otg.CheckingBatchConfigurations" />
+	</bean>
+
+	<bean id="otg.CheckingBatchConfigurations"
+		class="com.springtour.otg.domain.model.transaction.CheckingBatchConfigurations">
+		<property name="newBornRound" value="${runtime.otg.checking.batch.newBornRound}" />
+		<property name="unlivelyRound" value="${runtime.otg.checking.batch.unlivelyRound}" />
+		<property name="deadRound" value="${runtime.otg.checking.batch.deadRound}" />
+		<property name="intervalMinutes" value="${runtime.otg.checking.batch.intervalMinutes}" />
+		<property name="unlivelyTurnRounds" value="${runtime.otg.checking.batch.unlivelyTurnRounds}" />
+	</bean>
+
+</beans>

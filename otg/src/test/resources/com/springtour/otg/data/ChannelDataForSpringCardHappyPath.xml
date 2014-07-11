@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="GBK"?>
+
+<!--
+    Document   : ChannelDataForSpringCardHappyPath.xml
+    Created on : February 23, 2012, 3:16 PM
+    Author     : 005073
+    Description:
+        Purpose of the document follows.
+-->
+
+<root>
+    <data>
+        <id>
+            2
+        </id>  
+        <name>
+             春秋商旅卡
+        </name>
+        <AVAILABLE_CURRENCIES>
+            CNY
+        </AVAILABLE_CURRENCIES>
+    </data>
+</root>

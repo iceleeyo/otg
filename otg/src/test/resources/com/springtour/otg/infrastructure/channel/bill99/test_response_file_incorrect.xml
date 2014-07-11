@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<MasMessage xmlns="http://www.99bill.com/mas_cnp_merchant_interface">  
+  <version>1.0</version> 
+- <ErrorMsgContent>
+  <errorCode>B.BIN.0001</errorCode> 
+  <errorMessage>B.BIN.0001: cardNo is error!cardNo=[5528010000000001d] ExternalRefNumber=[PUR_NET20091019093701],merchantId=[104110045116003]</errorMessage> 
+  </ErrorMsgContent>
+  </MasMessage>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap
+	namespace="com/springtour/otg/dbop/TransactionDataPrepareOperationDaoSqlMap">
+
+    <delete id="clearData" parameterClass="java.util.Map">
+               delete from t_otg_transaction where transaction_no = #TRANSACTION_NO# 
+    </delete>
+        
+    <insert id="createData" parameterClass="java.util.Map">            
+		INSERT INTO t_otg_transaction (id,TRANSACTION_NO, version,state,amount,currency,		
+		when_Requested,when_Responsed,NOTIFICATION_SEQ,when_concluded,order_Id,application,order_No,merchant_code,channel_id,gate_way,partner_id)
+		VALUES
+		(#ID#,#TRANSACTION_NO#, #VERSION#,#STATE#,#AMOUNT#,#CURRENCY#,		
+		to_date(#WHEN_REQUESTED#,'yyyy-mm-dd hh24:mi:ss'),to_date(#WHEN_RESPONSED#,'yyyy-mm-dd hh24:mi:ss'),#NOTIFICATION_SEQ#,to_date(#WHEN_CONCLUDED#,'yyyy-mm-dd hh24:mi:ss'),#ORDER_ID#,#APPLICATION#,#ORDER_NO#,#MERCHANT_CODE#,#CHANNEL_ID#,#GATE_WAY#,#PARTNER_ID#)
+    </insert>
+</sqlMap>

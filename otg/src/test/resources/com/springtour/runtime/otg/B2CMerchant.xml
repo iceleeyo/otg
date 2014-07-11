@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="gb2312"?>
+<BOCOMB2C>	
+	<ApiURL>https://pbanktest.95559.com.cn/netpay/interface</ApiURL>
+	<OrderURL>https://pbanktest.95559.com.cn/netpay/MerPayB2C</OrderURL>
+	<ShortPayURL>https://pbanktest.95559.com.cn/netpay/PayB2cTrans</ShortPayURL>
+	<EnableLog>true</EnableLog>
+	<LogPath>C:\bocommjava\log\</LogPath>
+	<SettlementFilePath>C:\bocommjava\settlement\</SettlementFilePath>
+	<MerchantCertFile>C:\bocommjava\cert\301310063009501.PFX</MerchantCertFile>
+	<MerchantCertPassword>12345678</MerchantCertPassword>
+	<RootCertFile>C:\bocommjava\cert\test_root.cer</RootCertFile>
+</BOCOMB2C>

@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE module PUBLIC
+	"-//Puppy Crawl//DTD Check Configuration 1.2//EN"
+	"http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
+
+<module name="Checker">
+    
+    <module name="StrictDuplicateCode">
+        <property name="min" value="4"/>
+    </module>
+    <module name = "TreeWalker">
+	 <!--一行不超过120个字符-->
+        <module name="LineLength">
+            <property name="max" value="120"/>
+        </module>
+        <module name="MethodLength">
+            <property name="tokens" value="METHOD_DEF"/>
+            <property name ="max" value="60"/>
+        </module>
+<!--默认checkstyle命名检查-->
+        <module name="TypeName"/>
+        <module name="MethodName"/>
+        <module name="AvoidStarImport"/>
+        <module name="ConstantName"/>
+
+<!--代码规范检查-->
+<!--不能使用magic number-->
+        <module name="MagicNumber"/>
+<!--if嵌套不超过3层-->
+        <module name="NestedIfDepth">
+            <property name ="max"  value="3"/>
+        </module>
+        
+     
+
+    </module>
+    
+</module>
+
+

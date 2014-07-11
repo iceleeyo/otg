@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="defaultAutoCommit" value="${jdbc.defaultAutoCommit}" />
+	</bean>
+
+	<bean id="simpleJdbcTemplate" class="org.springframework.jdbc.core.simple.SimpleJdbcTemplate">
+		<constructor-arg ref="dataSource" />
+	</bean>
+
+	<bean id="databaseInitializer" class="com.springtour.test.DatabaseInitializer"
+		init-method="init" destroy-method="destroy">
+		<property name="jdbcTemplate" ref="simpleJdbcTemplate" />
+		<property name="configurations" ref="testConfigurations" />
+	</bean>
+
+	<bean id="testConfigurations" class="com.springtour.test.TestConfigurations">
+		<property name="usingSchema" value="${jdbc.dbunit.usingSchema}" />
+		<property name="embeddedDatabase" value="${jdbc.embeddedDatabase}" />
+	</bean>
+
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation"
+			value="classpath:com/springtour/otg/sqlMapConfig.xml" />
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="sqlMapClientTemplate" class="org.springframework.orm.ibatis.SqlMapClientTemplate">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="jdbcFixtureClearer" class="com.springtour.otg.FixtureClearer">
+		<property name="jdbcTemplate" ref="jdbcTemplate" />
+	</bean>
+
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<bean id="baseTransactionProxy"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean"
+		abstract="true">
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="proxyTargetClass" value="true" />
+	</bean>
+
+	<bean name="otg.TestConfigurations" class="com.springtour.otg.application.util.Configurations">
+		<property name="localApplicationUrl" value="${runtime.application.localBasePath.this}" />
+	</bean>
+	<bean id="propertiesFactoryBean"
+		class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="locations">
+			<list>
+				<value>
+					classpath:com/springtour/runtime/global.properties
+				</value>
+				<value>
+					classpath:com/springtour/runtime/otg/otg.properties
+				</value>
+				<value>
+					classpath:com/springtour/otg/otg.properties
+				</value>
+				<value>
+					classpath:test.properties
+				</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="propertyPlaceholderConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="properties" ref="propertiesFactoryBean" />
+	</bean>
+
+	<bean name="otg.SynchronousApplicationEventsImpl"
+		class="com.springtour.otg.application.impl.SynchronousApplicationEventsImpl">
+	</bean>
+
+
+
+	<bean id="otg.IBatisFakeOrderIdentityGeneratorImpl"
+		class="com.springtour.otg.infrastructure.persistence.ibatis.IBatisFakeOrderIdentityGeneratorImpl">
+		<property name="sqlMapClientTemplate" ref="sqlMapClientTemplate" />
+	</bean>
+
+	<bean id="otg.ChinapnrNotificationHttpServletRequestAssemblerImpl"
+		class="com.springtour.otg.infrastructure.channel.chinapnr.ChinapnrNotificationHttpServletRequestAssemblerImpl">
+	</bean>
+	<bean
+		id="otg.ChinapnrNotificationHttpServletRequestAssemblerWithBadAmount"
+		class="com.springtour.otg.infrastructure.channel.chinapnr.ChinapnrNotificationHttpServletRequestAssemblerWithBadAmount">
+	</bean>
+	<bean id="otg.ChinapnrNotificationHttpServletRequestAssemblerWithBadTxnNo"
+		class="com.springtour.otg.infrastructure.channel.chinapnr.ChinapnrNotificationHttpServletRequestAssemblerWithBadTxnNo">
+	</bean>
+	<bean
+		id="otg.ChinapnrNotificationHttpServletRequestAssemblerWithChargedFailure"
+		class="com.springtour.otg.infrastructure.channel.chinapnr.ChinapnrNotificationHttpServletRequestAssemblerWithChargedFailure">
+	</bean>
+
+	<bean id="otg.Bill99NotificationHttpServletRequestAssemblerImpl"
+		class="com.springtour.otg.infrastructure.channel.bill99.Bill99NotificationHttpServletRequestAssemblerImpl">
+	</bean>
+
+	<bean id="otg.Bill99NotificationHttpServletRequestAssemblerWithBadAmount"
+		class="com.springtour.otg.infrastructure.channel.bill99.Bill99NotificationHttpServletRequestAssemblerWithBadAmount">
+	</bean>
+
+	<bean id="otg.Bill99NotificationHttpServletRequestAssemblerWithBadTxnNo"
+		class="com.springtour.otg.infrastructure.channel.bill99.Bill99NotificationHttpServletRequestAssemblerWithBadTxnNo">
+	</bean>
+	<bean
+		id="otg.Bill99NotificationHttpServletRequestAssemblerWithChargedFailure"
+		class="com.springtour.otg.infrastructure.channel.bill99.Bill99NotificationHttpServletRequestAssemblerWithChargedFailure">
+	</bean>
+
+	<bean id="otg.AlipayNotificationHttpServletRequestAssemblerImpl"
+		class="com.springtour.otg.infrastructure.channel.alipay.AlipayNotificationHttpServletRequestAssemblerImpl">
+	</bean>
+	<bean
+		id="otg.AlipayNotificationHttpServletRequestAssemblerWithFakeSignature"
+		class="com.springtour.otg.infrastructure.channel.alipay.AlipayNotificationHttpServletRequestAssemblerImpl">
+	</bean>
+	<bean id="otg.AlipayNotificationHttpServletRequestAssemblerWithBadAmount"
+		class="com.springtour.otg.infrastructure.channel.alipay.AlipayNotificationHttpServletRequestAssemblerWithBadAmount">
+	</bean>
+	<bean id="otg.AlipayNotificationHttpServletRequestAssemblerWithBadTxnNo"
+		class="com.springtour.otg.infrastructure.channel.alipay.AlipayNotificationHttpServletRequestAssemblerWithBadTxnNo">
+	</bean>
+	<bean
+		id="otg.AlipayNotificationHttpServletRequestAssemblerWithChargedFailure"
+		class="com.springtour.otg.infrastructure.channel.alipay.AlipayNotificationHttpServletRequestAssemblerWithChargedFailure">
+	</bean>
+
+	<bean id="otg.TenpayNotificationHttpServletRequestAssemblerImpl"
+		class="com.springtour.otg.infrastructure.channel.tenpay.TenpayNotificationHttpServletRequestAssemblerImpl">
+	</bean>
+	<bean
+		id="otg.TenpayNotificationHttpServletRequestAssemblerWithFakeSignature"
+		class="com.springtour.otg.infrastructure.channel.tenpay.TenpayNotificationHttpServletRequestAssemblerImpl">
+	</bean>
+	<bean id="otg.TenpayNotificationHttpServletRequestAssemblerWithBadAmount"
+		class="com.springtour.otg.infrastructure.channel.tenpay.TenpayNotificationHttpServletRequestAssemblerWithBadAmount">
+	</bean>
+	<bean id="otg.TenpayNotificationHttpServletRequestAssemblerWithBadTxnNo"
+		class="com.springtour.otg.infrastructure.channel.tenpay.TenpayNotificationHttpServletRequestAssemblerWithBadTxnNo">
+	</bean>
+	<bean
+		id="otg.TenpayNotificationHttpServletRequestAssemblerWithChargedFailure"
+		class="com.springtour.otg.infrastructure.channel.tenpay.TenpayNotificationHttpServletRequestAssemblerWithChargedFailure">
+	</bean>
+
+	<bean id="otg.SpringCardNotificationHttpServletRequestAssemblerImpl"
+		class="com.springtour.otg.infrastructure.channel.springcard.SpringCardNotificationHttpServletRequestAssemblerImpl">
+	</bean>
+	<bean
+		id="otg.SpringCardNotificationHttpServletRequestAssemblerWithFakeSignature"
+		class="com.springtour.otg.infrastructure.channel.springcard.SpringCardNotificationHttpServletRequestAssemblerImpl">
+	</bean>
+	<bean
+		id="otg.SpringCardNotificationHttpServletRequestAssemblerWithBadAmount"
+		class="com.springtour.otg.infrastructure.channel.springcard.SpringCardNotificationHttpServletRequestAssemblerWithBadAmount">
+	</bean>
+	<bean
+		id="otg.SpringCardNotificationHttpServletRequestAssemblerWithBadTxnNo"
+		class="com.springtour.otg.infrastructure.channel.springcard.SpringCardNotificationHttpServletRequestAssemblerWithBadTxnNo">
+	</bean>
+	<bean
+		id="otg.SpringCardNotificationHttpServletRequestAssemblerWithChargedFailure"
+		class="com.springtour.otg.infrastructure.channel.springcard.SpringCardNotificationHttpServletRequestAssemblerWithChargedFailure">
+	</bean>
+
+	<bean id="otg.AlwaysSucceedMakePaymentServiceImpl"
+		class="com.springtour.otg.infrastructure.payment.ExternalMakePaymentServiceImpl">
+		<property name="application" value="1" />
+		<property name="makeAutoPaymentService" ref="otg.AlwaysSucceedMakeAutoPaymentServiceImpl" />
+	</bean>
+
+	<bean id="otg.AlwaysSucceedMakeAutoPaymentServiceImpl"
+		class="com.springtour.otg.infrastructure.payment.AlwaysSucceedMakeAutoPaymentServiceImpl">
+	</bean>
+
+	<bean id="otg.AlwaysFailedMakePaymentServiceImpl"
+		class="com.springtour.otg.infrastructure.payment.ExternalMakePaymentServiceImpl">
+		<property name="application" value="2" />
+		<property name="makeAutoPaymentService" ref="otg.AlwaysFailedMakeAutoPaymentServiceImpl" />
+	</bean>
+
+	<bean id="otg.AlwaysFailedMakeAutoPaymentServiceImpl"
+		class="com.springtour.otg.infrastructure.payment.AlwaysFailedMakeAutoPaymentServiceImpl">
+	</bean>
+
+	<bean id="otg.AlwaysErrorMakePaymentServiceImpl"
+		class="com.springtour.otg.infrastructure.payment.ExternalMakePaymentServiceImpl">
+		<property name="application" value="3" />
+		<property name="makeAutoPaymentService" ref="otg.AlwaysErrorMakeAutoPaymentServiceImpl" />
+	</bean>
+
+	<bean id="otg.AlwaysErrorMakeAutoPaymentServiceImpl"
+		class="com.springtour.otg.infrastructure.payment.AlwaysErrorMakeAutoPaymentServiceImpl">
+	</bean>
+
+	<bean id="otg.MakePaymentServiceFactoryStub"
+		class="com.springtour.otg.infrastructure.payment.PaymentDispatcher">
+		<property name="services">
+			<list>
+				<ref bean="otg.AlwaysFailedMakePaymentServiceImpl" />
+				<ref bean="otg.AlwaysErrorMakePaymentServiceImpl" />
+				<ref bean="otg.AlwaysSucceedMakePaymentServiceImpl" /><!--将这个放在最后用来测试转发是否起效，因为所有transaction数据都用的是1 -->
+			</list>
+		</property>
+	</bean>
+
+</beans>

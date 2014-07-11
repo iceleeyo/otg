@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="GBK"?>
+<root>
+    
+    <data>
+        <id>
+            12
+        </id>  
+        <name>
+             汇付天下
+        </name>
+        <AVAILABLE_CURRENCIES>
+            CNY
+        </AVAILABLE_CURRENCIES>
+    </data>
+</root>

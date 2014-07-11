@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<import resource="context-interfaces-facade.xml" />
+	<import resource="context-interfaces-facade-ws.xml" />
+	<import resource="context-interfaces-facade-http.xml" />
+	<import resource="context-interfaces-web.xml" />
+	<import resource="context-application.xml" />
+	<import resource="context-domain.xml" />
+	<import resource="context-infrastructure-channel.xml" />
+	<import resource="context-infrastructure-payment.xml" />
+	<import resource="context-infrastructure-persistence.xml" />
+	<import resource="context-infrastructure-messaging.xml" />
+	<import resource="context-infrastructure-mail.xml" />
+	<import resource="context-infrastructure-logging.xml" />
+
+
+</beans>
+

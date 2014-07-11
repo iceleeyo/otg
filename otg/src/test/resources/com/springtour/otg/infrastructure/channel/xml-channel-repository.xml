@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Repository>
+	<Channel id="1" name="银联" />
+	<Channel id="2" name="春秋商旅卡" />
+	<Channel id="4" name="付费通" />
+	<Channel id="5" name="财付通" />
+	<Channel id="6" name="建设银行" />
+	<Channel id="7" name="支付宝B2C" />
+	<Channel id="9" name="支付宝B2B" />
+	<Channel id="12" name="汇付天下" />
+	<Channel id="15" name="快钱" />
+</Repository>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap
+	namespace="com/springtour/otg/infrastructure/persistence/ibatis/MqSendFailedMessageRepositorySqlMap">
+    <insert id="store" parameterClass="com.springtour.otg.infrastructure.messaging.FailedMessage">
+        <selectKey resultClass="java.lang.Long" keyProperty="id"
+			type="pre">
+		select CHUNQIU3.SEQ_MQ_SEND_FAILED_PERSISTENT.NEXTVAL as id from dual
+        </selectKey>
+        insert into CHUNQIU3.T_MQ_SEND_FAILED_PERSISTENT (ID, MESSAGE, Q_NAME) values (#id#, #message#, #qName#)
+    </insert>
+    
+    <select id="loadAll" resultClass="com.springtour.otg.infrastructure.messaging.FailedMessage">
+        SELECT t.ID id, t.MESSAGE message, t.Q_NAME qName FROM CHUNQIU3.T_MQ_SEND_FAILED_PERSISTENT t
+    </select>
+    
+    <delete id="delete" parameterClass="java.lang.Long">
+        delete from CHUNQIU3.T_MQ_SEND_FAILED_PERSISTENT t where t.id = #id#
+    </delete>
+</sqlMap>

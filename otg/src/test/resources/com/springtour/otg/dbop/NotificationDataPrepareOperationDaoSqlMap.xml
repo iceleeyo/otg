@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap
+	namespace="com/springtour/otg/dbop/NotificationDataPrepareOperationDaoSqlMap">
+
+    <delete id="clearData" parameterClass="java.util.Map">
+               delete from t_otg_notification where txn_no = #TRANSACTION_NO# 
+    </delete>
+        
+    <insert id="createData" parameterClass="java.util.Map">            
+		insert into t_otg_notification
+  (sequence, txn_no, ext_txn_no, amount, charged, message, signature, currency, sync_method, when_received)
+values
+  (#sequence#, #txn_no#, #ext_txn_no#, #amount#, #charged#, #message#, #signature#, #currency#, #sync_method#, #when_received#)
+    </insert>
+</sqlMap>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="GBK"?>
+
+<!--
+    Document   : PartnerDataForAlipayHappyPath.xml
+    Created on : February 22, 2012, 4:21 PM
+    Author     : 005073
+    Description:
+        Purpose of the document follows.
+-->
+<root>
+    <data>
+        <id>1</id>
+        <name>移动</name>
+        <AVAILABLE_CHANNELS>2,7,9,12,15,5</AVAILABLE_CHANNELS>
+    </data>
+</root>

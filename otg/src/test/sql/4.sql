@@ -1,0 +1,1 @@
+update t_otg_transaction set checking_state = 1;

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+        
+    <bean id="otg.PaymentDispatcher"
+		class="com.springtour.otg.infrastructure.payment.PaymentDispatcher">
+        <property name="services">
+            <list>
+                <ref bean="otg.DomesticMakePaymentServiceImpl" />
+                <ref bean="otg.InternationalMakePaymentServiceImpl" />
+                <ref bean="otg.FitMakePaymentServiceImpl" />
+                <ref bean="otg.BusinessTravelMakePaymentServiceImpl"/>
+                <ref bean="otg.AirMakePaymentServiceImpl"/>
+                <ref bean="otg.TicketMakePaymentServiceImpl"/>
+                <ref bean="otg.CruiseMakePaymentServiceImpl"/>
+                <ref bean="otg.VisaMakePaymentServiceImpl"/>
+                <ref bean="otg.GroupTourMakePaymentServiceImpl"/>
+                <ref bean="otg.FreeTourMakePaymentServiceImpl"/>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="otg.DomesticMakePaymentServiceImpl"
+		class="com.springtour.otg.infrastructure.payment.ExternalMakePaymentServiceImpl">
+        <property name="application" value="${runtime.otg.application.springtour.domestic}"/>
+        <property name="makeAutoPaymentService"
+			ref="otg.HttpInvokerDomesticMakeAutoPaymentServiceFacadeImpl" />
+		<property name="mailManager" ref="otg.MailManager" />
+    </bean>
+    
+    <bean id="otg.InternationalMakePaymentServiceImpl"
+		class="com.springtour.otg.infrastructure.payment.ExternalMakePaymentServiceImpl">
+        <property name="application" value="${runtime.otg.application.springtour.international}"/>
+        <property name="makeAutoPaymentService"
+			ref="otg.HttpInvokerInternationalMakeAutoPaymentServiceFacadeImpl" />
+		<property name="mailManager" ref="otg.MailManager" />
+    </bean>
+    
+    <bean id="otg.FitMakePaymentServiceImpl"
+		class="com.springtour.otg.infrastructure.payment.ExternalMakePaymentServiceImpl">
+        <property name="application" value="${runtime.otg.application.springtour.fit}"/>
+        <property name="makeAutoPaymentService"
+			ref="otg.HttpInvokerFitMakeAutoPaymentServiceFacadeImpl" />
+		<property name="mailManager" ref="otg.MailManager" />
+    </bean>
+    
+     <bean id="otg.BusinessTravelMakePaymentServiceImpl"
+    	class="com.springtour.otg.infrastructure.payment.ExternalMakePaymentServiceImpl">
+        <property name="application" value="${runtime.otg.application.springtour.businessTravel}"/>
+        <property name="makeAutoPaymentService"
+			ref="otg.HttpInvokerBusinessTravelMakeAutoPaymentServiceFacadeImpl" />
+    	<property name="mailManager" ref="otg.MailManager" />
+    </bean>
+    
+    <bean id="otg.AirMakePaymentServiceImpl"
+    	class="com.springtour.otg.infrastructure.payment.ExternalMakePaymentServiceImpl">
+        <property name="application" value="${runtime.otg.application.springtour.air}"/>
+        <property name="makeAutoPaymentService"
+			ref="otg.HttpInvokerDomesticMakeAutoPaymentServiceFacadeImpl" />
+    	<property name="mailManager" ref="otg.MailManager" />
+    </bean>
+    
+    <bean id="otg.TicketMakePaymentServiceImpl"
+		class="com.springtour.otg.infrastructure.payment.ExternalMakePaymentServiceImpl">
+        <property name="application" value="${runtime.otg.application.springtour.ticket}"/>
+        <property name="makeAutoPaymentService"
+			ref="otg.HttpInvokerDomesticMakeAutoPaymentServiceFacadeImpl" />
+		<property name="mailManager" ref="otg.MailManager" />
+    </bean>
+    
+    <bean id="otg.CruiseMakePaymentServiceImpl"
+		class="com.springtour.otg.infrastructure.payment.ExternalMakePaymentServiceImpl">
+        <property name="application" value="${runtime.otg.application.springtour.cruise}"/>
+        <property name="makeAutoPaymentService"
+			ref="otg.HttpInvokerDomesticMakeAutoPaymentServiceFacadeImpl" />
+		<property name="mailManager" ref="otg.MailManager" />
+    </bean>
+    
+    <bean id="otg.VisaMakePaymentServiceImpl"
+		class="com.springtour.otg.infrastructure.payment.ExternalMakePaymentServiceImpl">
+        <property name="application" value="${runtime.otg.application.springtour.visa}"/>
+        <property name="makeAutoPaymentService"
+			ref="otg.HttpInvokerDomesticMakeAutoPaymentServiceFacadeImpl" />
+		<property name="mailManager" ref="otg.MailManager" />
+    </bean>
+    
+    <bean id="otg.GroupTourMakePaymentServiceImpl"
+		class="com.springtour.otg.infrastructure.payment.ExternalMakePaymentServiceImpl">
+        <property name="application" value="${runtime.otg.application.springtour.grouptour}"/>
+        <property name="makeAutoPaymentService"
+			ref="otg.HttpInvokerDomesticMakeAutoPaymentServiceFacadeImpl" />
+		<property name="mailManager" ref="otg.MailManager" />
+    </bean>
+    
+    <bean id="otg.FreeTourMakePaymentServiceImpl"
+		class="com.springtour.otg.infrastructure.payment.ExternalMakePaymentServiceImpl">
+        <property name="application" value="${runtime.otg.application.springtour.freetour}"/>
+        <property name="makeAutoPaymentService"
+			ref="otg.HttpInvokerDomesticMakeAutoPaymentServiceFacadeImpl" />
+		<property name="mailManager" ref="otg.MailManager" />
+    </bean>
+    
+    <bean id="otg.HttpInvokerDomesticMakeAutoPaymentServiceFacadeImpl"
+		class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+        <property name="serviceUrl"
+			value="${runtime.application.localBasePath.this}remote/group/MakePaymentServiceDomestic.htm" />
+        <property name="serviceInterface"
+			value="com.springtour.otg.infrastructure.payment.MakeAutoPaymentService" />
+    </bean>
+
+    <bean id="otg.HttpInvokerInternationalMakeAutoPaymentServiceFacadeImpl"
+		class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+        <property name="serviceUrl"
+			value="${runtime.application.localBasePath.outbound}remote/group/MakePaymentServiceOutbound.htm" />
+        <property name="serviceInterface"
+			value="com.springtour.otg.infrastructure.payment.MakeAutoPaymentService" />
+    </bean>
+	
+	<bean id="otg.HttpInvokerFitMakeAutoPaymentServiceFacadeImpl"
+		class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+        <property name="serviceUrl"
+			value="${runtime.application.localBasePath.this}remote/group/MakePaymentServiceFIT.htm" />
+        <property name="serviceInterface"
+			value="com.springtour.otg.infrastructure.payment.MakeAutoPaymentService" />
+    </bean>
+    
+   <bean id="otg.HttpInvokerBusinessTravelMakeAutoPaymentServiceFacadeImpl"
+   		class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+   		<property name="serviceUrl"
+			value="${runtime.otg.application.springtour.businessTravel.url}" />
+        <property name="serviceInterface"
+			value="com.springtour.otg.infrastructure.payment.MakeAutoPaymentService" />
+   </bean>
+   
+   <bean id="otg.HttpInvokerNewSystemMakeAutoPaymentServiceFacadeImpl"
+   		class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+   		<property name="serviceUrl"
+			value="${runtime.otg.application.springtour.newSystem.url}" />
+        <property name="serviceInterface"
+			value="com.springtour.otg.infrastructure.payment.MakeAutoPaymentService" />
+   </bean>
+
+</beans>

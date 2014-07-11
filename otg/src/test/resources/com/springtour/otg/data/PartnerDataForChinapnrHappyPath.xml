@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="GBK"?>
+
+<!--
+    Document   : PartnerDataForChinapnr.xml
+    Created on : February 29, 2012, 10:26 AM
+    Author     : 005073
+    Description:
+        Purpose of the document follows.
+-->
+<root>
+    <data>
+        <id>1</id>
+        <name>移动</name>
+        <AVAILABLE_CHANNELS>12</AVAILABLE_CHANNELS>
+    </data>
+</root>

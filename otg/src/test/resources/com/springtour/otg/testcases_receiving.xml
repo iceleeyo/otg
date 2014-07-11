@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+    
+    <bean name="otg.NotificationClearer"
+		class="com.springtour.otg.dbop.DataPrepareOperation">
+        <property name="dataReader"
+			ref="otg.DataReader" />
+        <property name="appendDataFilePath">
+            <list>
+                <value>/com/springtour/otg/data/GivesAllTransactions-springcard.xml</value>
+                <value>/com/springtour/otg/data/GivesAllTransactions-tenpay.xml</value>
+                <value>/com/springtour/otg/data/GivesAllTransactions-alipay.xml</value>
+                <value>/com/springtour/otg/data/GivesAllTransactions-chinapnr.xml</value>
+                <value>/com/springtour/otg/data/GivesAllTransactions-bill99.xml</value>
+            </list>
+        </property>
+        <property name="appendDao">
+            <list>
+                <ref bean="otg.NotificationDataPrepareOperationDao"/>
+                <ref bean="otg.NotificationDataPrepareOperationDao"/>
+                <ref bean="otg.NotificationDataPrepareOperationDao"/>
+                <ref bean="otg.NotificationDataPrepareOperationDao"/>
+                <ref bean="otg.NotificationDataPrepareOperationDao"/>
+            </list>
+        </property>
+    </bean>
+    
+    <bean name="otg.ChinapnrGivesAll"
+		class="com.springtour.otg.dbop.DataPrepareOperation">
+        <property name="dataReader"
+			ref="otg.DataReader" />
+        <property name="dataFilePath">
+            <list>
+                <value>/com/springtour/otg/data/ChannelAdmin-channel.xml</value>
+                <value>/com/springtour/otg/data/ChannelAdmin-gateway.xml</value>
+            </list>
+        </property>
+        <property name="dao">
+            <list>
+                <ref bean="otg.ChannelDataPrepareOperationDao"/>
+                <ref bean="otg.GatewayDataPrepareOperationDao"/>
+            </list>
+        </property>
+        <property name="appendDataFilePath">
+            <list>
+                <value>/com/springtour/otg/data/GivesMerchant-chinapnr.xml</value>
+                <value>/com/springtour/otg/data/GivesAllTransactions-chinapnr.xml</value>
+            </list>
+        </property>
+        <property name="appendDao">
+            <list>
+                <ref bean="otg.MerchantDataPrepareOperationDao"/>
+                <ref bean="otg.TransactionDataPrepareOperationDao"/>                
+            </list>
+        </property>
+    </bean>
+    
+    <bean name="otg.TenpayGivesAll"
+		class="com.springtour.otg.dbop.DataPrepareOperation">
+        <property name="dataReader"
+			ref="otg.DataReader" />
+        <property name="dataFilePath">
+            <list>
+                <value>/com/springtour/otg/data/ChannelAdmin-channel.xml</value>
+                <value>/com/springtour/otg/data/ChannelAdmin-gateway.xml</value>
+            </list>
+        </property>
+        <property name="dao">
+            <list>
+                <ref bean="otg.ChannelDataPrepareOperationDao"/>
+                <ref bean="otg.GatewayDataPrepareOperationDao"/>
+            </list>
+        </property>
+        <property name="appendDataFilePath">
+            <list>
+                <value>/com/springtour/otg/data/GivesAllTransactions-tenpay.xml</value>
+                <value>/com/springtour/otg/data/GivesMerchant-tenpay.xml</value>
+            </list>
+        </property>
+        <property name="appendDao">
+            <list>
+                <ref bean="otg.TransactionDataPrepareOperationDao"/>     
+                <ref bean="otg.MerchantDataPrepareOperationDao"/>
+            </list>
+        </property>
+    </bean>
+    
+    <bean name="otg.SpringCardGivesAll"
+		class="com.springtour.otg.dbop.DataPrepareOperation">
+        <property name="dataReader"
+			ref="otg.DataReader" />
+        <property name="dataFilePath">
+            <list>
+                <value>/com/springtour/otg/data/ChannelAdmin-channel.xml</value>
+                <value>/com/springtour/otg/data/ChannelAdmin-gateway.xml</value>
+            </list>
+        </property>
+        <property name="dao">
+            <list>
+                <ref bean="otg.ChannelDataPrepareOperationDao"/>
+                <ref bean="otg.GatewayDataPrepareOperationDao"/>
+            </list>
+        </property>
+        <property name="appendDataFilePath">
+            <list>
+                <value>/com/springtour/otg/data/GivesMerchant-springcard.xml</value>
+                <value>/com/springtour/otg/data/GivesAllTransactions-springcard.xml</value>
+            </list>
+        </property>
+        <property name="appendDao">
+            <list>
+                <ref bean="otg.MerchantDataPrepareOperationDao"/>
+                <ref bean="otg.TransactionDataPrepareOperationDao"/>                
+            </list>
+        </property>
+    </bean>
+    
+    <bean name="otg.AlipayGivesAll"
+		class="com.springtour.otg.dbop.DataPrepareOperation">
+        <property name="dataReader"
+			ref="otg.DataReader" />
+        <property name="dataFilePath">
+            <list>
+                <value>/com/springtour/otg/data/ChannelAdmin-channel.xml</value>
+                <value>/com/springtour/otg/data/ChannelAdmin-gateway.xml</value>
+            </list>
+        </property>
+        <property name="dao">
+            <list>
+                <ref bean="otg.ChannelDataPrepareOperationDao"/>
+                <ref bean="otg.GatewayDataPrepareOperationDao"/>
+            </list>
+        </property>
+        <property name="appendDataFilePath">
+            <list>
+                <value>/com/springtour/otg/data/GivesMerchant-alipay.xml</value>
+                <value>/com/springtour/otg/data/GivesAllTransactions-alipay.xml</value>
+            </list>
+        </property>
+        <property name="appendDao">
+            <list>
+                <ref bean="otg.MerchantDataPrepareOperationDao"/>
+                <ref bean="otg.TransactionDataPrepareOperationDao"/>                
+            </list>
+        </property>
+    </bean>
+    
+    <bean name="otg.Bill99GivesAll"
+		class="com.springtour.otg.dbop.DataPrepareOperation">
+        <property name="dataReader"
+			ref="otg.DataReader" />
+        <property name="dataFilePath">
+            <list>
+                <value>/com/springtour/otg/data/ChannelAdmin-channel.xml</value>
+                <value>/com/springtour/otg/data/ChannelAdmin-gateway.xml</value>
+            </list>
+        </property>
+        <property name="dao">
+            <list>
+                <ref bean="otg.ChannelDataPrepareOperationDao"/>
+                <ref bean="otg.GatewayDataPrepareOperationDao"/>
+            </list>
+        </property>
+        <property name="appendDataFilePath">
+            <list>
+                <value>/com/springtour/otg/data/GivesMerchant-bill99.xml</value>
+                <value>/com/springtour/otg/data/GivesAllTransactions-bill99.xml</value>
+            </list>
+        </property>
+        <property name="appendDao">
+            <list>
+                <ref bean="otg.MerchantDataPrepareOperationDao"/>
+                <ref bean="otg.TransactionDataPrepareOperationDao"/>                
+            </list>
+        </property>
+    </bean>
+
+</beans>

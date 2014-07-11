@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="GBK"?>
+
+<!--
+    Document   : ChannelDataForTenpayHappyPath.xml
+    Created on : February 23, 2012, 3:28 PM
+    Author     : 005073
+    Description:
+        Purpose of the document follows.
+-->
+
+<root>
+    <data>
+        <id>
+            5
+        </id>  
+        <name>
+             财付通
+        </name>
+        <AVAILABLE_CURRENCIES>
+            CNY
+        </AVAILABLE_CURRENCIES>
+    </data>
+</root>

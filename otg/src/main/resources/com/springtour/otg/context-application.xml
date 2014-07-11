@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<bean id="otg.Configurations" class="com.springtour.otg.application.util.Configurations">
+		<property name="globalApplicationUrl" value="${runtime.application.globalBasePath.this}" />
+		<property name="localApplicationUrl" value="${runtime.application.localBasePath.this}" />
+		<property name="chinapnrPublicKeyFileName"
+			value="${runtime.otg.channel.chinapnr.publicKeyFileName}" />
+		<property name="chinapnrRequestScheme" value="${runtime.otg.channel.chinapnr.scheme}" />
+		<property name="chinapnrRequestHost" value="${runtime.otg.channel.chinapnr.host}" />
+		<property name="chinapnrRequestPort" value="${runtime.otg.channel.chinapnr.port}" />
+		<property name="chinapnrRequestPath" value="${runtime.otg.channel.chinapnr.path}" />
+		<property name="chinapnrNotifyPath" value="${otg.channel.chinapnr.notifyUrl}" />
+		<property name="springcardRequestUrl" value="${runtime.otg.channel.springcard.requestUrl}" />
+		<property name="springcardNotifyPath" value="${otg.channel.springcard.notifyUrl}" />
+		<property name="tenpayRequestUrl" value="${runtime.otg.channel.tenpay.requestUrl}" />
+		<property name="tenpayNotifyPath" value="${otg.channel.tenpay.notifyUrl}" />
+		<property name="tenpayQueryUrl" value="${runtime.otg.channel.tenpay.queryUrl}" />
+		<property name="alipayRequestUrl" value="${runtime.otg.channel.alipay.requestUrl}" />
+		<property name="ccbRequestUrl" value="${runtime.otg.channel.ccb.requestUrl}" />
+		<property name="ccbInstallmentRequestUrl" value="${runtime.otg.channel.ccb.installment.requestUrl}" />
+		<property name="bill99PublicKeyFileName"
+			value="${runtime.otg.channel.bill99.publicKeyFileName}" />
+		<property name="bill99PosPublicKeyFileName"
+			value="${runtime.otg.channel.bill99pos.publicKeyFileName}" />
+		<property name="bill99RequestUrl" value="${runtime.otg.channel.bill99.requestUrl}" />
+		<property name="bill99NotifyPath" value="${otg.channel.bill99.notifyUrl}" />
+		<property name="bill99GatewayNotifyPath" value="${otg.channel.bill99gateway.notifyUrl}" />
+		<property name="bill99GatewayRequestUrl"
+			value="${runtime.otg.channel.bill99gateway.bill99GatewayRequestUrl}" />
+		<property name="bill99GatewayPublicKeyFileName"
+			value="${runtime.otg.channel.bill99gateway.publicKeyFileName}" />
+		<property name="cmbcRequestUrl" value="${runtime.otg.channel.cmbc.requestUrl}" />
+		<property name="cmbcQueryUrl" value="${runtime.otg.channel.cmbc.queryUrl}" />
+		<property name="cmbcPrivateKeyFileName" value="${runtime.otg.channel.cmbc.privateKeyFileName}" />
+		<property name="cmbcPublicKeyFileName" value="${runtime.otg.channel.cmbc.publicKeyFileName}" />
+		<property name="icbcCertFileName" value="${runtime.otg.channel.icbc.publicCert}" />
+		<property name="icbcKeyFileName" value="${runtime.otg.channel.icbc.privateKey}" />
+		<property name="icbcPayRequestUrl" value="${runtime.otg.channel.icbc.requestUrl}" />
+		<property name="icbcVerifySignPubFileName" value="${runtime.otg.channel.icbc.verifySignPubCert}" />
+		<property name="icbcJksFileName" value="${runtime.otg.channel.icbc.icbcJksFileName}"/>
+		<property name="icbcQueryRequestUrl" value="${runtime.otg.channel.icbc.queryRequestUrl}"/>
+		
+		<property name="upopBaseURL" value="${runtime.otg.channel.upop.upopBaseURL}"/>
+		<property name="upopQueryURL" value="${runtime.otg.channel.upop.upopQueryURL}"/>
+		<property name="transTimeout" value="${runtime.otg.channel.upop.transTimeout}"/>
+		<property name="upopNotifyUrl" value="${runtime.otg.channel.upop.notifyUrl}"/>
+		
+		<property name="cmbRequestUrl" value="${runtime.otg.channel.cmb.cmbRequestUrl}"/>
+		<property name="cmbConnectionType" value="${runtime.otg.channel.cmb.cmbConnectionType}"/>
+		<property name="cmbBranchId" value="${runtime.otg.channel.cmb.cmbBranchId}"/>
+		
+		<property name="boshRequestUrl" value="${runtime.otg.channel.bosh.boshRequestUrl}"/>
+		<property name="boshQueryUrl" value="${runtime.otg.channel.bosh.boshQueryUrl}"/>
+		<property name="boshNotifyUrl" value="${otg.channel.bosh.notifyUrl}"/>
+		<property name="boshCertFileName" value="${runtime.otg.channel.bosh.boshCertFileName}"/>
+		<property name="boshPublicKeyName" value="${runtime.otg.channel.bosh.boshPublicKeyName}"/>
+		
+		<property name="alipayWapRequestUrl" value="${runtime.otg.channel.alipaywap.alipayWapRequestUrl}"/>
+		<property name="alipayWapQueryUrl" value="${runtime.otg.channel.alipaywap.alipayWapQueryUrl}"/>
+		<property name="alipayWapNotifyPath" value="${otg.channel.alipaywap.notifyUrl}"/>
+		
+		<property name="bocRequestUrl" value="${runtime.otg.channel.boc.bocRequestUrl}"/>
+		<property name="bocQueryUrl" value="${runtime.otg.channel.boc.bocQueryUrl}"/>
+		<property name="bocCertFileName" value="${runtime.otg.channel.boc.bocCertFileName}"/>
+		
+		<property name="bocommRequestUrl" value="${runtime.otg.channel.bocomm.bocommRequestUrl}"/>
+		<property name="bocommNotifyUrl" value="${otg.channel.bocomm.notifyUrl}"/>
+		<property name="bocommXmlFileName" value="${otg.channel.bocomm.bocommXmlFileName}"/>
+		<property name="bocommPfxFileName" value="${runtime.otg.channel.bocomm.bocommPfxFileName}"/>
+		<property name="bocommCertFileName" value="${runtime.otg.channel.bocomm.bocommCertFileName}"/>
+	</bean>
+
+	<bean id="otg.ResponseProcedure" class="com.springtour.otg.application.ResponseProcedure">
+		<property name="transactingService" ref="otg.TransactingServiceDecorator" />
+		<property name="makePaymentService" ref="otg.PaymentDispatcher" />
+		<property name="transactionRepository" ref="otg.IBatisTransactionRepositoryImpl" />
+	</bean>
+
+	<bean name="otg.TransactingServiceDecorator" class="com.springtour.otg.application.impl.TransactingServiceDecorator">
+		<property name="target" ref="otg.TransactingServiceImpl" />
+		<property name="mailManager" ref="otg.MailManager" />
+		<property name="loggingSupport" ref="otg.Slf4jLoggingSupportImpl" />
+	</bean>
+
+	<bean name="otg.TransactingServiceImplTarget"
+		class="com.springtour.otg.application.impl.TransactingServiceImpl">
+		<property name="transactionFactory" ref="otg.TransactionFactory" />
+		<property name="transactionRepository" ref="otg.IBatisTransactionRepositoryImpl" />
+		<property name="merchantRepository" ref="otg.IBatisMerchantRepositoryImpl" />
+		<property name="channelRepository" ref="otg.IBatisChannelRepositoryImpl" />
+		<property name="notificationRepository" ref="otg.IBatisNotificationRepositoryImpl" />
+		<property name="clock" ref="otg.IBatisClockImpl" />
+	</bean>
+
+	<bean id="otg.SafeHandleInterceptor"
+		class="com.springtour.otg.application.util.SafeHandleInterceptor">
+	</bean>
+
+	<bean id="otg.TransactingServiceImpl" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target" ref="otg.TransactingServiceImplTarget" />
+		<property name="proxyInterfaces"
+			value="com.springtour.otg.application.TransactingService" />
+		<property name="interceptorNames" value="otg.SafeHandleInterceptor" />
+	</bean>
+
+	<bean name="otg.MerchantAdminServiceImplTarget"
+		class="com.springtour.otg.application.impl.MerchantAdminServiceImpl">
+		<property name="merchantRepository" ref="otg.IBatisMerchantRepositoryImpl" />
+	</bean>
+
+	<bean id="otg.MerchantAdminServiceImpl" parent="baseTransactionProxy">
+		<property name="target" ref="otg.MerchantAdminServiceImplTarget" />
+		<property name="transactionAttributes">
+			<props>
+				<prop key="register">
+					PROPAGATION_REQUIRED,ISOLATION_READ_COMMITTED,-Exception
+				</prop>
+				<prop key="updateInfo">
+					PROPAGATION_REQUIRED,ISOLATION_READ_COMMITTED,-Exception
+				</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean name="otg.NotificationServiceImpl"
+		class="com.springtour.otg.application.impl.NotificationServiceImpl">
+		<property name="notificationFactory" ref="otg.ChannelDispatcher" />
+		<property name="notificationRepository" ref="otg.IBatisNotificationRepositoryImpl" />
+		<property name="transactionRepository" ref="otg.IBatisTransactionRepositoryImpl" />
+		<property name="clock" ref="otg.IBatisClockImpl" />
+	</bean>
+
+	<bean name="otg.Bill99NotificationServiceImpl"
+		class="com.springtour.otg.application.impl.NotificationServiceImpl">
+		<property name="notificationFactory" ref="otg.Bill99NotificationFactoryImpl" />
+		<property name="notificationRepository" ref="otg.IBatisNotificationRepositoryImpl" />
+	</bean>
+
+	<bean name="otg.PartnerAdminServiceImplTarget"
+		class="com.springtour.otg.application.impl.PartnerAdminServiceImpl">
+		<property name="partnerRepository" ref="otg.IBatisPartnerRepositoryImpl" />
+	</bean>
+
+	<bean id="otg.PartnerAdminServiceImpl" parent="baseTransactionProxy">
+		<property name="target" ref="otg.PartnerAdminServiceImplTarget" />
+		<property name="transactionAttributes">
+			<props>
+				<prop key="register">
+					PROPAGATION_REQUIRED,ISOLATION_READ_COMMITTED,-Exception
+				</prop>
+				<prop key="updateAvailableChannels">
+					PROPAGATION_REQUIRED,ISOLATION_READ_COMMITTED,-Exception
+				</prop>
+				<prop key="updateRecommendedGateways">
+					PROPAGATION_REQUIRED,ISOLATION_READ_COMMITTED,-Exception
+				</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean name="otg.ChannelAdminServiceImplTarget"
+		class="com.springtour.otg.application.impl.ChannelAdminServiceImpl">
+		<property name="channelRepository" ref="otg.IBatisChannelRepositoryImpl" />
+	</bean>
+
+	<bean id="otg.ChannelAdminServiceImpl" parent="baseTransactionProxy">
+		<property name="target" ref="otg.ChannelAdminServiceImplTarget" />
+		<property name="transactionAttributes">
+			<props>
+				<prop key="updateGateways">
+					PROPAGATION_REQUIRED,ISOLATION_READ_COMMITTED,-Exception
+				</prop>
+				<prop key="updateAvailableCurrencies">
+					PROPAGATION_REQUIRED,ISOLATION_READ_COMMITTED,-Exception
+				</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="otg.ResendMessageServiceImpl"
+		class="com.springtour.otg.application.impl.ResendMessageServiceImpl">
+		<property name="jmsTemplate" ref="jmsTemplate" />
+		<property name="mqSendFailedMessageRepository" ref="otg.IBatisMqSendFailedMessageRepositoryImpl" />
+		<property name="messageQueuen">
+			<map>
+				<entry>
+					<key>
+						<value>${otg.notification.message.queue}</value>
+					</key>
+					<ref bean="otg.NotificationReceivedQueue" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="otg.CheckTransactionServiceImpl" parent="otg.AbstractLoggingProxy">
+		<property name="target" ref="otg.CheckTransactionServiceImplTarget" />
+		<property name="proxyTargetClass" value="false" />
+		<property name="proxyInterfaces" value="com.springtour.otg.application.CheckTransactionService" />
+	</bean>
+
+	<bean id="otg.CheckTransactionServiceImplTarget"
+		class="com.springtour.otg.application.impl.CheckTransactionServiceImpl">
+		<property name="transactionRepository" ref="otg.IBatisTransactionRepositoryImpl" />
+		<property name="transactionChecker" ref="otg.TransactionCheckerImpl" />
+		<property name="notificationService" ref="otg.NotificationServiceImpl" />
+		<property name="applicationEvents" ref="otg.JmsApplicationEventsImpl" />
+		<property name="checkingEvents" ref="otg.JmsCheckingEventsImpl" />
+		<property name="clock" ref="otg.IBatisClockImpl" />
+	</bean>
+
+	<bean id="otg.CheckingBatch" class="com.springtour.otg.application.CheckingBatch">
+		<property name="transactionRepository" ref="otg.IBatisTransactionRepositoryImpl" />
+		<property name="transactionChecker" ref="otg.TransactionCheckerImpl" />
+		<property name="transactionCheckingEvents" ref="otg.JmsCheckingEventsImpl" />
+		<property name="clock" ref="otg.IBatisClockImpl" />
+		<property name="validationSpecifications"
+			ref="otg.ConfigurableTransactionValidationSpecificationsImpl" />
+		<property name="batchNotifier" ref="otg.SynchronousCheckingBatchNotifierImpl" />
+	</bean>
+</beans>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap
+	namespace="com/springtour/otg/infrastructure/persistence/ibatis/NotificationRepositorySqlMap">
+
+    <select id="nextSequence" resultClass="String">
+		select SEQ_OTG_NOTIFICATION.nextval from dual
+    </select>
+
+    <insert id="save"
+		parameterClass="com.springtour.otg.domain.model.notification.Notification">
+		insert into t_otg_notification (sequence, when_received,txn_no,
+		ext_txn_no, amount, currency, charged, message, sync_method,
+		signature, card_info) values (#sequence#, #whenReceived#,
+		#txnNo.number#, #extTxnNo#, #amount.amount#,
+		#amount.currency.code#,#charged#, #message#,#synchronizingMethod#,
+		#signature#,#cardInfo#)
+    </insert>
+
+    <resultMap id="notificationResultMap"
+		class="com.springtour.otg.domain.model.notification.Notification">
+        <result property="sequence" column="sequence" />
+        <result property="whenReceived" column="when_received" />
+        <result property="txnNo.number" column="txn_no"/>
+        <result property="extTxnNo" column="ext_txn_no" />
+        <result property="amount.amount" column="amount" />
+        <result property="amount.currency.code" column="currency" />
+        <result property="charged" column="charged" />
+        <result property="message" column="message" />
+        <result property="synchronizingMethod" column="sync_method" />
+        <result property="signature" column="signature" />
+        <result property="cardInfo" column="card_info" nullValue="" />
+    </resultMap>
+	
+    <select id="findBySequence" parameterClass="java.lang.String"
+		resultMap="notificationResultMap">
+		select n.sequence, n.when_received, n.txn_no, n.ext_txn_no,
+		n.amount, n.currency, n.charged, n.message, n.sync_method,
+		n.signature, n.card_info from t_otg_notification n where
+		n.sequence=#sequence#
+    </select>
+    
+    <select id="findByTxnNo" parameterClass="java.lang.String"
+		resultMap="notificationResultMap">
+		select n.sequence, n.when_received, n.txn_no, n.ext_txn_no,
+		n.amount, n.currency, n.charged, n.message, n.sync_method,
+		n.signature, n.card_info from t_otg_notification n where
+		n.txn_no=#number# order by n.sequence desc
+    </select>
+</sqlMap>

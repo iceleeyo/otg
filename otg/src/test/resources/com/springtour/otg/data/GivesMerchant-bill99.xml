@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="GBK"?>
+
+<!--
+    Document   : MerchantDataForAlipayHappyPath.xml
+    Created on : February 22, 2012, 4:10 PM
+    Author     : Future
+    Description:
+        Purpose of the document follows.
+-->
+
+<root>
+    <data>
+        <merchant_name>
+            上海春秋总社
+        </merchant_name>
+        <merchant_code>
+            106110065110002
+        </merchant_code>
+        <merchant_branch_id>
+            61
+        </merchant_branch_id>
+        <merchant_channel>
+            15
+        </merchant_channel>
+        <MERCHANT_HOLDER>
+            上海春秋总社
+        </MERCHANT_HOLDER>
+        <merchant_key>
+            10101061,123456
+        </merchant_key>
+        <enabled>
+            1
+        </enabled>
+    </data>
+    <data>
+        <merchant_name>
+            春秋北京分社
+        </merchant_name>
+        <merchant_code>
+            104110045112003
+        </merchant_code>
+        <merchant_branch_id>
+            65
+        </merchant_branch_id>
+        <merchant_channel>
+            15
+        </merchant_channel>
+        <MERCHANT_HOLDER>
+            春秋北京分社
+        </MERCHANT_HOLDER>
+        <merchant_key>
+            10002003,vpos123
+        </merchant_key>
+        <enabled>
+            1
+        </enabled>
+    </data>
+</root>

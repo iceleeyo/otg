@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="GBK"?>
+
+<!--
+    Document   : PartnerDataForTenpayHappyPath.xml
+    Created on : February 23, 2012, 3:31 PM
+    Author     : 005073
+    Description:
+        Purpose of the document follows.
+-->
+
+<root>
+    <data>
+        <partner_id>2</partner_id>
+        <channel>5</channel>
+        <gateway>CCB</gateway>
+        <priority>0</priority>
+    </data>
+    <data>
+        <partner_id>2</partner_id>
+        <channel>5</channel>
+        <gateway>CMB</gateway>
+        <priority>1</priority>
+    </data>
+</root>

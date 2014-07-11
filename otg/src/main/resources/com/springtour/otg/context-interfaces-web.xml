@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+
+	<bean name="otg.ChinapnrNotificationReceiver"
+		class="com.springtour.otg.interfaces.transacting.web.DefaultNotificationReceiverImpl">
+		<property name="channelId" value="${otg.channel.chinapnr.channelId}" />
+		<property name="notificationService" ref="otg.NotificationServiceImpl" />
+		<property name="acknowledger" ref="otg.ChinapnrNotificationAcknowledgerImpl" />
+		<property name="applicationEvents" ref="otg.JmsApplicationEventsImpl" />
+
+	</bean>
+
+	<bean name="otg.b2b.AlipayNotificationReceiver"
+		class="com.springtour.otg.interfaces.transacting.web.DefaultNotificationReceiverImpl">
+		<property name="channelId" value="${otg.channel.alipay.b2b.channelId}" />
+		<property name="notificationService" ref="otg.NotificationServiceImpl" />
+		<property name="acknowledger" ref="otg.AlipayNotificationAcknowledgerImpl" />
+		<property name="applicationEvents" ref="otg.JmsApplicationEventsImpl" />
+	</bean>
+
+	<bean name="otg.b2c.AlipayNotificationReceiver"
+		class="com.springtour.otg.interfaces.transacting.web.DefaultNotificationReceiverImpl">
+		<property name="channelId" value="${otg.channel.alipay.b2c.channelId}" />
+		<property name="notificationService" ref="otg.NotificationServiceImpl" />
+		<property name="acknowledger" ref="otg.AlipayNotificationAcknowledgerImpl" />
+		<property name="applicationEvents" ref="otg.JmsApplicationEventsImpl" />
+	</bean>
+
+	<bean name="otg.SpringCardNotificationReceiver"
+		class="com.springtour.otg.interfaces.transacting.web.DefaultNotificationReceiverImpl">
+		<property name="channelId" value="${otg.channel.springcard.channelId}" />
+		<property name="notificationService" ref="otg.NotificationServiceImpl" />
+		<property name="applicationEvents" ref="otg.JmsApplicationEventsImpl" />
+	</bean>
+
+	<bean name="otg.Bill99NotificationReceiver"
+		class="com.springtour.otg.interfaces.transacting.web.Bill99NotificationReceiverImpl">
+		<property name="channelId" value="${otg.channel.bill99.channelId}" />
+		<property name="notificationService" ref="otg.NotificationServiceImpl" />
+		<property name="acknowledger" ref="otg.Bill99NotificationAcknowledgerImpl" />
+		<property name="applicationEvents" ref="otg.JmsApplicationEventsImpl" />
+	</bean>
+	
+	<bean name="otg.Bill99PosNotificationReceiver"
+		class="com.springtour.otg.interfaces.transacting.web.DefaultNotificationReceiverImpl">
+		<property name="channelId" value="${otg.channel.bill99pos.channelId}" />
+		<property name="notificationService" ref="otg.NotificationServiceImpl" />
+		<property name="acknowledger" ref="otg.Bill99PosNotificationAcknowledgerImpl" />
+		<property name="applicationEvents" ref="otg.JmsApplicationEventsImpl" />
+	</bean>
+	
+	<bean id=" otg.Bill99PosCancelTxnNotificationReceiver"
+		class="com.springtour.otg.interfaces.transacting.web.DefaultNotificationReceiverImpl">
+		<property name="channelId" value="${otg.channel.bill99pos.channelId}" />
+		<property name="notificationService" ref="otg.NotificationServiceImpl" />
+		<property name="acknowledger" ref="otg.Bill99PosNotificationAcknowledgerImpl" />
+		<property name="applicationEvents" ref="otg.JmsApplicationEventsImpl" />
+	</bean>
+
+	<bean name="otg.TenpayNotificationReceiver"
+		class="com.springtour.otg.interfaces.transacting.web.DefaultNotificationReceiverImpl">
+		<property name="channelId" value="${otg.channel.tenpay.channelId}" />
+		<property name="notificationService" ref="otg.NotificationServiceImpl" />
+		<property name="acknowledger" ref="otg.TenpayNotificationAcknowledgerImpl" />
+		<property name="applicationEvents" ref="otg.JmsApplicationEventsImpl" />
+	</bean>
+
+	<bean name="otg.Bill99GatewayNotificationReceiver"
+		class="com.springtour.otg.interfaces.transacting.web.DefaultNotificationReceiverImpl">
+		<property name="channelId" value="${otg.channel.bill99gateway.channelId}" />
+		<property name="notificationService" ref="otg.NotificationServiceImpl" />
+		<property name="acknowledger"
+			ref="otg.Bill99GatewayNotificationAcknowledgerImpl" />
+		<property name="applicationEvents" ref="otg.JmsApplicationEventsImpl" />
+	</bean>
+
+	<bean name="otg.CcbNotificationReceiver"
+		class="com.springtour.otg.interfaces.transacting.web.DefaultNotificationReceiverImpl">
+		<property name="channelId" value="${otg.channel.ccb.channelId}" />
+		<property name="notificationService" ref="otg.NotificationServiceImpl" />
+		<property name="applicationEvents" ref="otg.JmsApplicationEventsImpl" />
+	</bean>
+
+	<bean name="otg.CcbInstallmentNotificationReceiver"
+		class="com.springtour.otg.interfaces.transacting.web.DefaultNotificationReceiverImpl">
+		<property name="channelId" value="${otg.channel.ccb.installment.channelId}" />
+		<property name="notificationService" ref="otg.NotificationServiceImpl" />
+		<property name="applicationEvents" ref="otg.JmsApplicationEventsImpl" />
+	</bean>
+	
+	<bean name="otg.cmbcNotificationReceiver"
+		class="com.springtour.otg.interfaces.transacting.web.DefaultNotificationReceiverImpl">
+		<property name="channelId" value="${otg.channel.cmbc.channelId}" />
+		<property name="notificationService" ref="otg.NotificationServiceImpl" />
+		<property name="applicationEvents" ref="otg.JmsApplicationEventsImpl" />
+	</bean>
+	
+	<bean name="otg.IcbcNotificationReceiver"
+		class="com.springtour.otg.interfaces.transacting.web.DefaultNotificationReceiverImpl">
+		<property name="channelId" value="${otg.channel.icbc.channelId}" />
+		<property name="notificationService" ref="otg.NotificationServiceImpl" />
+		<property name="applicationEvents" ref="otg.JmsApplicationEventsImpl" />
+	</bean>
+	
+	<bean name="otg.UpopNotificationReceiver"
+		class="com.springtour.otg.interfaces.transacting.web.UpopNotificationReceiverImpl">
+		<property name="channelId" value="${otg.channel.upop.channelId}" />
+		<property name="notificationService" ref="otg.NotificationServiceImpl" />
+		<property name="applicationEvents" ref="otg.JmsApplicationEventsImpl" />
+	</bean>
+	
+	<bean name="otg.CmbNotificationReceiver"
+		class="com.springtour.otg.interfaces.transacting.web.DefaultNotificationReceiverImpl">
+		<property name="channelId" value="${otg.channel.cmb.channelId}" />
+		<property name="notificationService" ref="otg.NotificationServiceImpl" />
+		<property name="applicationEvents" ref="otg.JmsApplicationEventsImpl" />
+	</bean>
+	
+	<bean name="otg.BoshNotificationReceiver"
+		class="com.springtour.otg.interfaces.transacting.web.DefaultNotificationReceiverImpl">
+		<property name="channelId" value="${otg.channel.bosh.channelId}" />
+		<property name="notificationService" ref="otg.NotificationServiceImpl" />
+		<property name="applicationEvents" ref="otg.JmsApplicationEventsImpl" />
+	</bean>
+	
+	<bean name="otg.AlipayWapNotificationReceiver"
+		class="com.springtour.otg.interfaces.transacting.web.AlipayWapNotificationReceiverImpl">
+		<property name="channelId" value="${otg.channel.alipaywap.channelId}" />
+		<property name="notificationService" ref="otg.NotificationServiceImpl" />
+		<property name="acknowledger" ref="otg.AlipayWapNotificationAcknowledgerImpl" />
+		<property name="applicationEvents" ref="otg.JmsApplicationEventsImpl" />
+	</bean>
+	
+	<bean name="otg.BocNotificationReceiver"
+		class="com.springtour.otg.interfaces.transacting.web.DefaultNotificationReceiverImpl">
+		<property name="channelId" value="${otg.channel.boc.channelId}" />
+		<property name="notificationService" ref="otg.NotificationServiceImpl" />
+		<property name="applicationEvents" ref="otg.JmsApplicationEventsImpl" />
+	</bean>
+	
+	<bean name="otg.BocommNotificationReceiver"
+		class="com.springtour.otg.interfaces.transacting.web.DefaultNotificationReceiverImpl">
+		<property name="channelId" value="${otg.channel.bocomm.channelId}" />
+		<property name="notificationService" ref="otg.NotificationServiceImpl" />
+		<property name="applicationEvents" ref="otg.JmsApplicationEventsImpl" />
+	</bean>
+
+	<bean id="otg.ReceiverUrlHandlerMapping"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="/${otg.channel.chinapnr.notifyUrl}">
+					otg.ChinapnrNotificationReceiver
+                </prop>
+				<prop key="/${otg.channel.bill99.notifyUrl}">
+					otg.Bill99NotificationReceiver
+                </prop>
+                <prop key="/${otg.channel.bill99pos.notifyUrl}">
+					otg.Bill99PosNotificationReceiver
+                </prop>
+                <prop key="/${otg.channel.bill99pos.cancelTxn.notifyUrl}">
+                   otg.Bill99PosCancelTxnNotificationReceiver
+                </prop>
+				<prop key="/${otg.channel.alipay.b2b.notifyUrl}">
+					otg.b2b.AlipayNotificationReceiver
+                </prop>
+				<prop key="/${otg.channel.alipay.b2c.notifyUrl}">
+					otg.b2c.AlipayNotificationReceiver
+                </prop>
+				<prop key="/${otg.channel.springcard.notifyUrl}">
+					otg.SpringCardNotificationReceiver
+                </prop>
+				<prop key="/${otg.channel.tenpay.notifyUrl}">
+					otg.TenpayNotificationReceiver
+                </prop>
+				<prop key="/${otg.channel.bill99gateway.notifyUrl}">
+					otg.Bill99GatewayNotificationReceiver
+                </prop>
+				<prop key="/${otg.channel.ccb.notifyUrl}">
+					otg.CcbNotificationReceiver
+                </prop>
+               <prop key="/${otg.channel.ccb.installment.notifyUrl}">
+					otg.CcbInstallmentNotificationReceiver
+                </prop>
+				<prop key="/${otg.channel.cmbc.notifyUrl}">
+					otg.cmbcNotificationReceiver
+                </prop>
+                <prop key="/${otg.channel.icbc.notifyUrl}">
+					otg.IcbcNotificationReceiver
+                </prop>
+                <prop key="/${otg.channel.upop.notifyUrl}">
+					otg.UpopNotificationReceiver
+                </prop>
+                <prop key="/${otg.channel.cmb.notifyUrl}">
+					otg.CmbNotificationReceiver
+                </prop>
+                <prop key="/${otg.channel.bosh.notifyUrl}">
+					otg.BoshNotificationReceiver
+                </prop>
+                <prop key="/${otg.channel.alipaywap.notifyUrl}">
+					otg.AlipayWapNotificationReceiver
+                </prop>
+                <prop key="/${otg.channel.bocomm.notifyUrl}">
+					otg.BocommNotificationReceiver
+                </prop>
+			</props>
+		</property>
+	</bean>
+
+
+
+	<bean id="otg.TransactionExportController"
+		class="com.springtour.otg.interfaces.admin.web.TransactionExportController">
+		<property name="securityGateway" ref="otgadapter.HttpSessionSecurityGatewayImpl" />
+		<property name="transactionAdminServiceFacade" ref="otg.TransactionAdminServiceFacadeImpl" />
+		<property name="maxExportSize" value="${runtime.otg.transactionsExportSize}" />
+	</bean>
+</beans>

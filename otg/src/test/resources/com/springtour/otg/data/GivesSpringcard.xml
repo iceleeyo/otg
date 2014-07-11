@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="GBK"?>
+<root>
+    
+    <data>
+        <id>
+            2
+        </id>  
+        <name>
+             春秋商旅卡
+        </name>
+        <AVAILABLE_CURRENCIES>
+            CNY
+        </AVAILABLE_CURRENCIES>
+    </data>
+</root>

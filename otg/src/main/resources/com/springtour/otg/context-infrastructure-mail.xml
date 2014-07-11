@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd"
+	xmlns:aop="http://www.springframework.org/schema/aop">
+    
+    <bean id="otg.MailManager" class="com.springtour.otg.infrastructure.mail.SendMailService">
+        <property name="sendMailService" ref="sendMailWebPowerService" />
+		<property name="mailConfig" ref="otg.MailConfig" />
+		<property name="airMailConfig" ref="otg.AirMailConfig" />
+		<property name="ticketMailConfig" ref="otg.TicketMailConfig" />
+		<property name="cruiseMailConfig" ref="otg.CruiseMailConfig" />
+		<property name="visaMailConfig" ref="otg.VisaMailConfig" />
+		<property name="groupTourMailConfig" ref="otg.GroupTourMailConfig" />
+		<property name="freeTourMailConfig" ref="otg.FreeTourMailConfig" />
+    </bean>
+    
+    <bean id="otg.MailConfig" class="com.spring.sendmail.model.MailConfig">
+        <property name="emailTitlePrefix" value="${runtime.otg.email.title.prefix}" />
+        <property name="emailAddresses">
+        	<list>
+        		<value>${runtime.otg.email.to}</value>
+        	</list>
+        </property>
+        <property name="emailCC">
+        	<list>
+        		<value>${runtime.otg.email.cc}</value>
+        	</list>
+        </property>
+        <property name="emailSys" value="otg"/>
+    </bean>
+    
+    <bean id="otg.AirMailConfig" class="com.spring.sendmail.model.MailConfig">
+        <property name="emailTitlePrefix" value="${runtime.otg.email.title.prefix}" />
+        <property name="emailAddresses">
+        	<list>
+        		<value>${runtime.otg.email.to}</value>
+        		<value>${runtime.otg.air.email.to}</value>
+        	</list>
+        </property>
+        <property name="emailCC">
+        	<list>
+        		<value>${runtime.otg.email.cc}</value>
+        	</list>
+        </property>
+        <property name="emailSys" value="otg"/>
+    </bean>
+    
+    <bean id="otg.TicketMailConfig" class="com.spring.sendmail.model.MailConfig">
+        <property name="emailTitlePrefix" value="${runtime.otg.email.title.prefix}" />
+        <property name="emailAddresses">
+        	<list>
+        		<value>${runtime.otg.email.to}</value>
+        	</list>
+        </property>
+        <property name="emailCC">
+        	<list>
+        		<value>${runtime.otg.email.cc}</value>
+        	</list>
+        </property>
+        <property name="emailSys" value="otg"/>
+    </bean>
+    
+    <bean id="otg.CruiseMailConfig" class="com.spring.sendmail.model.MailConfig">
+        <property name="emailTitlePrefix" value="${runtime.otg.email.title.prefix}" />
+        <property name="emailAddresses">
+        	<list>
+        		<value>${runtime.otg.email.to}</value>
+        	</list>
+        </property>
+        <property name="emailCC">
+        	<list>
+        		<value>${runtime.otg.email.cc}</value>
+        	</list>
+        </property>
+        <property name="emailSys" value="otg"/>
+    </bean>
+    
+    <bean id="otg.VisaMailConfig" class="com.spring.sendmail.model.MailConfig">
+        <property name="emailTitlePrefix" value="${runtime.otg.email.title.prefix}" />
+        <property name="emailAddresses">
+        	<list>
+        		<value>${runtime.otg.email.to}</value>
+        	</list>
+        </property>
+        <property name="emailCC">
+        	<list>
+        		<value>${runtime.otg.email.cc}</value>
+        	</list>
+        </property>
+        <property name="emailSys" value="otg"/>
+    </bean>
+    
+    <bean id="otg.GroupTourMailConfig" class="com.spring.sendmail.model.MailConfig">
+        <property name="emailTitlePrefix" value="${runtime.otg.email.title.prefix}" />
+        <property name="emailAddresses">
+        	<list>
+        		<value>${runtime.otg.email.to}</value>
+        	</list>
+        </property>
+        <property name="emailCC">
+        	<list>
+        		<value>${runtime.otg.email.cc}</value>
+        	</list>
+        </property>
+        <property name="emailSys" value="otg"/>
+    </bean>
+    
+    <bean id="otg.FreeTourMailConfig" class="com.spring.sendmail.model.MailConfig">
+        <property name="emailTitlePrefix" value="${runtime.otg.email.title.prefix}" />
+        <property name="emailAddresses">
+        	<list>
+        		<value>${runtime.otg.email.to}</value>
+        	</list>
+        </property>
+        <property name="emailCC">
+        	<list>
+        		<value>${runtime.otg.email.cc}</value>
+        	</list>
+        </property>
+        <property name="emailSys" value="otg"/>
+    </bean>
+
+    <bean id="otg.MailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host">
+            <value>${runtime.otg.email.host}</value>
+        </property>
+        <property name="javaMailProperties">
+            <props>
+                <!-- 如果要使用用户名和密码验证,这一步需要 -->
+                <prop key="mail.smtp.auth">true</prop>
+                 <!-- 设置邮件编码方式 -->
+                <prop key="mail.mime.charset">UTF-8</prop>
+            </props>
+        </property>
+        <!--你的Email地址-->
+        <property name="username">
+            <value>${runtime.otg.email.username}</value>
+        </property>
+        <property name="password">
+            <value>${runtime.otg.email.password}</value>
+        </property>
+        <property name="defaultEncoding">
+        	<value>UTF-8</value>
+        </property>
+    </bean>
+
+    <!-- 简单的message -->
+    <bean id="otg.MailMessage"
+          class="org.springframework.mail.SimpleMailMessage">
+        <!--收件人-->
+        <property name="to">
+        	<list>
+        		 <value>${runtime.otg.email.to}</value>
+        	</list>
+        </property>
+        <!--收件人-->
+        <property name="cc">
+        	<list>
+        		 <value>${runtime.otg.email.cc}</value>
+        	</list>
+        </property>
+        <!--发件人-->
+        <property name="from">
+            <value>${runtime.otg.email.from}</value>
+        </property>
+    </bean>
+</beans>

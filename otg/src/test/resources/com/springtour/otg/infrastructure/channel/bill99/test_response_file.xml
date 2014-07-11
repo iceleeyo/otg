@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<MasMessage xmlns="http://www.99bill.com/mas_cnp_merchant_interface">  
+
+    <version>1.0</version>  
+    <TxnMsgContent>  
+        <txnType>PUR</txnType>  
+        <interactiveStatus>TR2</interactiveStatus>  
+        <storableCardNo>4392255778</storableCardNo>  
+        <amount>1200.00</amount>  
+        <merchantId>104110045111144</merchantId>  
+        <terminalId>00000001</terminalId>  
+
+        <entryTime>20071219011215</entryTime>  
+        <customerId>13906003829</customerId>  
+        <externalRefNumber>2012020108790905</externalRefNumber>  
+        <transTime>20071219011216</transTime>  
+        <refNumber>000000000012</refNumber>  
+        <responseCode>C0</responseCode>  
+        <cardOrg>CU</cardOrg>  
+
+          <issuer>招商银行</issuer>  
+
+      </TxnMsgContent>  
+</MasMessage>  

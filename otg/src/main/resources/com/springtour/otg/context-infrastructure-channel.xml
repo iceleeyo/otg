@@ -1,0 +1,748 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd"
+	xmlns:aop="http://www.springframework.org/schema/aop">
+
+
+	<!-- 99bill -->
+	<bean id="otg.Bill99RequestWithCardInfoAdapterImpl"
+		class="com.springtour.otg.infrastructure.channel.bill99.Bill99RequestWithCardInfoAdapterImpl">
+		<constructor-arg value="${otg.channel.bill99.channelId}" />
+		<property name="configurations" ref="otg.Configurations" />
+		<property name="clock" ref="otg.IBatisClockImpl" />
+		<property name="notificationService" ref="otg.Bill99NotificationServiceImpl" />
+		<property name="applicationEvents" ref="otg.JmsApplicationEventsImpl" />
+		<property name="statusCodeTranslator" ref="otg.Bill99StatusCodeTranslator" />
+	</bean>
+
+	<bean id="otg.Bill99NotificationValidatorImpl"
+		class="com.springtour.otg.infrastructure.channel.bill99.Bill99NotificationValidatorImpl">
+		<property name="configurations" ref="otg.Configurations" />
+
+	</bean>
+
+	<bean id="otg.Bill99NotificationFactoryImpl"
+		class="com.springtour.otg.infrastructure.channel.bill99.Bill99NotificationFactoryImpl">
+		<constructor-arg value="${otg.channel.bill99.channelId}" />
+		<property name="transactionRepository" ref="otg.IBatisTransactionRepositoryImpl" />
+		<property name="notificationRepository" ref="otg.IBatisNotificationRepositoryImpl" />
+		<property name="clock" ref="otg.IBatisClockImpl" />
+		<property name="notificationValidator" ref="otg.Bill99NotificationValidatorImpl" />
+	</bean>
+
+	<bean id="otg.Bill99NotificationAcknowledgerImpl"
+		class="com.springtour.otg.infrastructure.channel.bill99.Bill99NotificationAcknowledgerImpl">
+		<property name="transactionRepository" ref="otg.IBatisTransactionRepositoryImpl" />
+	</bean>
+
+	<bean id="otg.Bill99StatusCodeTranslator"
+		class="com.springtour.otg.infrastructure.channel.StatusCodeTranslator">
+		<property name="unavailableCreditList">
+			<list>
+				<value>0</value>
+			</list>
+		</property>
+		<property name="invalidCardHolderList">
+			<list>
+				<value>0</value>
+			</list>
+		</property>
+		<property name="invalidCardInfoList">
+			<list>
+				<value>0</value>
+			</list>
+		</property>
+		<property name="unsupportedServiceList">
+			<list>
+				<value>0</value>
+			</list>
+		</property>
+	</bean>
+
+
+	<!-- 99bill vpos -->
+	<bean id="otg.Bill99PosRequestAdapter"
+		class="com.springtour.otg.infrastructure.channel.bill99pos.Bill99PosRequestAdapter">
+		<constructor-arg value="${otg.channel.bill99pos.channelId}" />
+		<property name="transactionRepository" ref="otg.IBatisTransactionRepositoryImpl" />
+	</bean>
+
+	<!--chinapnr -->
+
+
+	<bean id="otg.ChinapnrRequestWithCardInfoAdapterImpl"
+		class="com.springtour.otg.infrastructure.channel.chinapnr.ChinapnrRequestWithCardInfoAdapterImpl">
+		<constructor-arg value="${otg.channel.chinapnr.channelId}" />
+		<property name="configurations" ref="otg.Configurations" />
+		<property name="statusCodeTranslator" ref="otg.ChinapnrStatusCodeTranslator" />
+	</bean>
+
+	<bean id="otg.ChinapnrStatusCodeTranslator"
+		class="com.springtour.otg.infrastructure.channel.StatusCodeTranslator">
+		<property name="unavailableCreditList">
+			<list>
+				<value>10</value>
+				<value>52</value>
+				<value>57</value>
+			</list>
+		</property>
+		<property name="invalidCardHolderList">
+			<list>
+				<value>36</value>
+				<value>37</value>
+				<value>38</value>
+				<value>39</value>
+				<value>40</value>
+				<value>62</value>
+				<value>63</value>
+			</list>
+		</property>
+		<property name="invalidCardInfoList">
+			<list>
+				<value>34</value>
+				<value>35</value>
+				<value>65</value>
+			</list>
+		</property>
+		<property name="unsupportedServiceList">
+			<list>
+				<value>31</value>
+				<value>33</value>
+				<value>67</value>
+				<value>69</value>
+				<value>70</value>
+				<value>71</value>
+				<value>72</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="otg.ChinapnrNotificationValidator"
+		class="com.springtour.otg.infrastructure.channel.chinapnr.ChinapnrNotificationValidatorImpl">
+		<property name="configurations" ref="otg.Configurations" />
+
+	</bean>
+
+	<bean id="otg.ChinapnrNotificationFactoryImpl"
+		class="com.springtour.otg.infrastructure.channel.chinapnr.ChinapnrNotificationFactoryImpl">
+		<constructor-arg value="${otg.channel.chinapnr.channelId}" />
+		<property name="transactionRepository" ref="otg.IBatisTransactionRepositoryImpl" />
+		<property name="notificationRepository" ref="otg.IBatisNotificationRepositoryImpl" />
+		<property name="clock" ref="otg.IBatisClockImpl" />
+		<property name="notificationValidator" ref="otg.ChinapnrNotificationValidator" />
+	</bean>
+
+	<bean id="otg.ChinapnrNotificationAcknowledgerImpl"
+		class="com.springtour.otg.infrastructure.channel.chinapnr.ChinapnrNotificationAcknowledgerImpl">
+	</bean>
+
+	<!-- tenpay -->
+	<bean id="otg.TenpayRequestWithoutCardServiceImpl"
+		class="com.springtour.otg.infrastructure.channel.tenpay.TenpayRequestWithoutCardServiceImpl">
+		<constructor-arg value="${otg.channel.tenpay.channelId}" />
+		<property name="configurations" ref="otg.Configurations" />
+	</bean>
+
+	<bean id="otg.TenpayNotificationValidator"
+		class="com.springtour.otg.infrastructure.channel.tenpay.TenpayNotificationValidatorImpl">
+	</bean>
+
+	<bean id="otg.TenpayNotificationFactoryImpl"
+		class="com.springtour.otg.infrastructure.channel.tenpay.TenpayNotificationFactoryImpl">
+		<constructor-arg value="${otg.channel.tenpay.channelId}" />
+		<property name="transactionRepository" ref="otg.IBatisTransactionRepositoryImpl" />
+		<property name="notificationRepository" ref="otg.IBatisNotificationRepositoryImpl" />
+		<property name="clock" ref="otg.IBatisClockImpl" />
+		<property name="notificationValidator" ref="otg.TenpayNotificationValidator" />
+	</bean>
+
+	<bean id="otg.TenpayNotificationAcknowledgerImpl"
+		class="com.springtour.otg.infrastructure.channel.tenpay.TenpayNotificationAcknowledgerImpl">
+	</bean>
+
+	<bean id="otg.TenpayExternalTransactionQueryObject"
+		class="com.springtour.otg.infrastructure.channel.tenpay.TenpayExternalTransactionQueryObject">
+		<constructor-arg value="${otg.channel.tenpay.channelId}" />
+		<property name="configurations" ref="otg.Configurations" />
+	</bean>
+
+	<!-- alipay -->
+	<bean id="otg.AlipayHandlingServiceImpl"
+		class="com.springtour.otg.infrastructure.channel.alipay.AlipayHandlingServiceImpl">
+		<property name="configurations" ref="otg.Configurations" />
+	</bean>
+
+	<bean id="otg.AlipayNotificationValidatorImpl"
+		class="com.springtour.otg.infrastructure.channel.alipay.AlipayNotificationValidatorImpl">
+	</bean>
+
+	<bean id="otg.b2c.AlipayRequestWithoutCardInfoAdapterImpl"
+		class="com.springtour.otg.infrastructure.channel.alipay.AlipayRequestWithoutCardInfoAdapterImpl">
+		<constructor-arg value="${otg.channel.alipay.b2c.channelId}" />
+		<property name="alipayHandlingService" ref="otg.AlipayHandlingServiceImpl" />
+		<property name="notifyUrl" value="${otg.channel.alipay.b2c.notifyUrl}" />
+	</bean>
+
+	<bean id="otg.b2b.AlipayRequestWithoutCardInfoAdapterImpl"
+		class="com.springtour.otg.infrastructure.channel.alipay.AlipayRequestWithoutCardInfoAdapterImpl">
+		<constructor-arg value="${otg.channel.alipay.b2b.channelId}" />
+		<property name="alipayHandlingService" ref="otg.AlipayHandlingServiceImpl" />
+		<property name="notifyUrl" value="${otg.channel.alipay.b2c.notifyUrl}" />
+	</bean>
+
+	<bean id="otg.b2c.AlipayNotificationFactoryImpl"
+		class="com.springtour.otg.infrastructure.channel.alipay.AlipayNotificationFactoryImpl">
+		<constructor-arg value="${otg.channel.alipay.b2c.channelId}" />
+		<property name="transactionRepository" ref="otg.IBatisTransactionRepositoryImpl" />
+		<property name="notificationRepository" ref="otg.IBatisNotificationRepositoryImpl" />
+		<property name="clock" ref="otg.IBatisClockImpl" />
+		<property name="notificationValidator" ref="otg.AlipayNotificationValidatorImpl" />
+	</bean>
+
+	<bean id="otg.b2b.AlipayNotificationFactoryImpl"
+		class="com.springtour.otg.infrastructure.channel.alipay.AlipayNotificationFactoryImpl">
+		<constructor-arg value="${otg.channel.alipay.b2b.channelId}" />
+		<property name="transactionRepository" ref="otg.IBatisTransactionRepositoryImpl" />
+		<property name="notificationRepository" ref="otg.IBatisNotificationRepositoryImpl" />
+		<property name="clock" ref="otg.IBatisClockImpl" />
+		<property name="notificationValidator" ref="otg.AlipayNotificationValidatorImpl" />
+	</bean>
+
+	<bean id="otg.AlipayNotificationAcknowledgerImpl"
+		class="com.springtour.otg.infrastructure.channel.alipay.AlipayNotificationAcknowledgerImpl">
+		<property name="alipayHandlingService" ref="otg.AlipayHandlingServiceImpl" />
+	</bean>
+
+	<bean id="otg.b2b.AlipayExternalTransactionQueryObject"
+		class="com.springtour.otg.infrastructure.channel.alipay.AlipayExternalTransactionQueryObject">
+		<constructor-arg value="${otg.channel.alipay.b2b.channelId}" />
+		<property name="configurations" ref="otg.Configurations" />
+	</bean>
+
+	<bean id="otg.b2c.AlipayExternalTransactionQueryObject"
+		class="com.springtour.otg.infrastructure.channel.alipay.AlipayExternalTransactionQueryObject">
+		<constructor-arg value="${otg.channel.alipay.b2c.channelId}" />
+		<property name="configurations" ref="otg.Configurations" />
+	</bean>
+
+	<!-- springcard -->
+	<bean id="otg.SpringCardRequestWithoutCardInfoAdapterImpl"
+		class="com.springtour.otg.infrastructure.channel.springcard.SpringCardRequestWithoutCardInfoAdapterImpl">
+		<constructor-arg value="${otg.channel.springcard.channelId}" />
+		<property name="configurations" ref="otg.Configurations" />
+		<property name="clock" ref="otg.IBatisClockImpl" />
+	</bean>
+
+	<bean id="otg.SpringCardNotificationFactoryImpl"
+		class="com.springtour.otg.infrastructure.channel.springcard.SpringCardNotificationFactoryImpl">
+		<constructor-arg value="${otg.channel.springcard.channelId}" />
+		<property name="transactionRepository" ref="otg.IBatisTransactionRepositoryImpl" />
+		<property name="notificationRepository" ref="otg.IBatisNotificationRepositoryImpl" />
+		<property name="clock" ref="otg.IBatisClockImpl" />
+		<property name="notificationValidator" ref="otg.SpringCardNotificationValidatorImpl" />
+	</bean>
+
+	<bean id="otg.SpringCardNotificationValidatorImpl"
+		class="com.springtour.otg.infrastructure.channel.springcard.SpringCardNotificationValidatorImpl">
+	</bean>
+
+
+	<!-- bill99gateway -->
+	<bean id="otg.Bill99GatewayPkiPair"
+		class="com.springtour.otg.infrastructure.channel.bill99gateway.PkiPair">
+		<property name="configurations" ref="otg.Configurations" />
+	</bean>
+
+	<bean id="otg.Bill99GatewayNotificationValidator"
+		class="com.springtour.otg.infrastructure.channel.bill99gateway.Bill99GatewayNotificationValidatorImpl">
+		<property name="pki" ref="otg.Bill99GatewayPkiPair" />
+	</bean>
+
+	<bean id="otg.Bill99GatewayNotificationFactoryImpl"
+		class="com.springtour.otg.infrastructure.channel.bill99gateway.Bill99GatewayNotificationFactoryImpl">
+		<constructor-arg value="${otg.channel.bill99gateway.channelId}" />
+		<property name="transactionRepository" ref="otg.IBatisTransactionRepositoryImpl" />
+		<property name="notificationRepository" ref="otg.IBatisNotificationRepositoryImpl" />
+		<property name="clock" ref="otg.IBatisClockImpl" />
+		<property name="notificationValidator" ref="otg.Bill99GatewayNotificationValidator" />
+	</bean>
+
+	<bean id="otg.Bill99GatewayNotificationAcknowledgerImpl"
+		class="com.springtour.otg.infrastructure.channel.bill99gateway.Bill99GatewayNotificationAcknowledgerImpl">
+	</bean>
+
+	<bean id="otg.Bill99GatewayRequestWithoutCardServiceImpl"
+		class="com.springtour.otg.infrastructure.channel.bill99gateway.Bill99GatewayRequestWithoutCardServiceImpl">
+		<constructor-arg value="${otg.channel.bill99gateway.channelId}" />
+		<property name="bill99GatewayRequestParametersAssemble" ref="otg.Bill99GatewayRequestParametersAssemble"></property>
+	</bean>
+
+	<bean id="otg.Bill99GatewayRequestParametersAssemble"
+		class="com.springtour.otg.infrastructure.channel.bill99gateway.Bill99GatewayRequestParametersAssemble">
+		<property name="pkiPair" ref="otg.Bill99GatewayPkiPair"></property>
+		<property name="configurations" ref="otg.Configurations"></property>
+	</bean>
+	
+	<!-- bill99pos -->
+	<bean id="otg.Bill99PosNotificationValidator"
+		class="com.springtour.otg.infrastructure.channel.bill99pos.Bill99PosNotificationValidatorImpl">
+		<property name="configurations" ref="otg.Configurations" />
+	</bean>
+	
+	<bean id="otg.Bill99PosNotificationFactoryImpl"
+		class="com.springtour.otg.infrastructure.channel.bill99pos.Bill99PosNotificationFactoryImpl">
+		<constructor-arg value="${otg.channel.bill99pos.channelId}" />
+		<property name="transactionRepository" ref="otg.IBatisTransactionRepositoryImpl" />
+		<property name="notificationRepository" ref="otg.IBatisNotificationRepositoryImpl" />
+		<property name="clock" ref="otg.IBatisClockImpl" />
+		<property name="notificationValidator" ref="otg.Bill99PosNotificationValidator" />
+	</bean>
+	
+	<bean id="otg.Bill99PosNotificationAcknowledgerImpl"
+		class="com.springtour.otg.infrastructure.channel.bill99pos.Bill99PosNotificationAcknowledgerImpl">
+	</bean>
+
+	<!--ccb -->
+	<bean id="otg.CcbNotificationValidatorImpl"
+		class="com.springtour.otg.infrastructure.channel.ccb.CcbNotificationValidatorImpl">
+	</bean>
+
+	<bean id="otg.CcbNotificationFactoryImpl"
+		class="com.springtour.otg.infrastructure.channel.ccb.CcbNotificationFactoryImpl">
+		<constructor-arg value="${otg.channel.ccb.channelId}" />
+		<property name="transactionRepository" ref="otg.IBatisTransactionRepositoryImpl" />
+		<property name="notificationRepository" ref="otg.IBatisNotificationRepositoryImpl" />
+		<property name="clock" ref="otg.IBatisClockImpl" />
+		<property name="notificationValidator" ref="otg.CcbNotificationValidatorImpl" />
+	</bean>
+
+	<bean id="otg.CcbRequestUrlAssembler"
+		class="com.springtour.otg.infrastructure.channel.ccb.CcbRequestUrlAssembler">
+		<property name="configurations" ref="otg.Configurations" />
+	</bean>
+
+	<bean id="otg.CcbRequestWithoutCardServiceImpl"
+		class="com.springtour.otg.infrastructure.channel.ccb.CcbRequestWithoutCardServiceImpl">
+		<constructor-arg value="${otg.channel.ccb.channelId}" />
+		<property name="ccbRequestUrlAssembler" ref="otg.CcbRequestUrlAssembler" />
+	</bean>
+
+	<!-- ccb installment -->
+	<bean id="otg.CcbInstallmentNotificationValidatorImpl"
+		class="com.springtour.otg.infrastructure.channel.ccb.CcbInstallmentNotificationValidatorImpl">
+	</bean>
+
+	<bean id="otg.CcbInstallmentNotificationFactoryImpl"
+		class="com.springtour.otg.infrastructure.channel.ccb.CcbNotificationFactoryImpl">
+		<constructor-arg value="${otg.channel.ccb.installment.channelId}" />
+		<property name="transactionRepository" ref="otg.IBatisTransactionRepositoryImpl" />
+		<property name="notificationRepository" ref="otg.IBatisNotificationRepositoryImpl" />
+		<property name="clock" ref="otg.IBatisClockImpl" />
+		<property name="notificationValidator" ref="otg.CcbInstallmentNotificationValidatorImpl" />
+	</bean>
+
+	<bean id="otg.CcbInstallmentRequestUrlAssembler"
+		class="com.springtour.otg.infrastructure.channel.ccb.CcbInstallmentRequestUrlAssembler">
+		<property name="configurations" ref="otg.Configurations" />
+	</bean>
+
+	<bean id="otg.CcbInstallmentRequestWithoutCardServiceImpl"
+		class="com.springtour.otg.infrastructure.channel.ccb.CcbRequestWithoutCardServiceImpl">
+		<constructor-arg value="${otg.channel.ccb.installment.channelId}" />
+		<property name="ccbRequestUrlAssembler" ref="otg.CcbInstallmentRequestUrlAssembler" />
+	</bean>
+
+	<!-- cmbc -->
+	<bean id="otg.CmbcExternalTransactionQueryObject"
+		class="com.springtour.otg.infrastructure.channel.cmbc.CmbcExternalTransactionQueryObject">
+		<constructor-arg value="${otg.channel.cmbc.channelId}" />
+		<property name="configurations" ref="otg.Configurations" />
+		<property name="encryption" ref="otg.CmbcEncryption" />
+	</bean>
+
+	<bean id="otg.CmbcNotificationFactoryImpl"
+		class="com.springtour.otg.infrastructure.channel.cmbc.CmbcNotificationFactoryImpl">
+		<constructor-arg value="${otg.channel.cmbc.channelId}" />
+		<property name="transactionRepository" ref="otg.IBatisTransactionRepositoryImpl" />
+		<property name="notificationRepository" ref="otg.IBatisNotificationRepositoryImpl" />
+		<property name="clock" ref="otg.IBatisClockImpl" />
+		<property name="encryption" ref="otg.CmbcEncryption" />
+	</bean>
+
+	<bean id="otg.CmbcEncryption"
+		class="com.springtour.otg.infrastructure.channel.cmbc.Encryption">
+		<property name="configurations" ref="otg.Configurations" />
+	</bean>
+
+	<bean id="otg.CmbcRequestWithoutCardServiceImpl"
+		class="com.springtour.otg.infrastructure.channel.cmbc.CmbcRequestWithoutCardServiceImpl">
+		<constructor-arg value="${otg.channel.cmbc.channelId}" />
+		<property name="cmbcRequestUrlAssembler" ref="otg.CmbcRequestUrlAssembler" />
+	</bean>
+
+	<bean id="otg.CmbcRequestUrlAssembler"
+		class="com.springtour.otg.infrastructure.channel.cmbc.CmbcRequestUrlAssembler">
+		<property name="configurations" ref="otg.Configurations" />
+		<property name="encryption" ref="otg.CmbcEncryption" />
+	</bean>
+
+	<bean id="otg.CmbcTransactionNoGeneratorImpl"
+		class="com.springtour.otg.infrastructure.channel.cmbc.CmbcTransactionNoGeneratorImpl">
+		<constructor-arg value="${otg.channel.cmbc.channelId}" />
+	</bean>
+	
+	<!-- icbc -->
+	<bean id="otg.IcbcEncryption"
+		class="com.springtour.otg.infrastructure.channel.icbc.Encryption">
+		<property name="configurations" ref="otg.Configurations" />
+	</bean>
+	
+	<bean id="otg.IcbcRequestWithoutCardServiceImpl"
+		class="com.springtour.otg.infrastructure.channel.icbc.IcbcRequestWithoutCardServiceImpl">
+		<constructor-arg value="${otg.channel.icbc.channelId}" />
+		<property name="assembler" ref="otg.IcbcRequestUrlAssembler" />
+	</bean>
+
+	<bean id="otg.IcbcRequestUrlAssembler"
+		class="com.springtour.otg.infrastructure.channel.icbc.IcbcRequestUrlAssembler">
+		<property name="configurations" ref="otg.Configurations" />
+		<property name="encryption" ref="otg.IcbcEncryption" />
+	</bean>
+	
+	<bean id="otg.IcbcNotificationValidator"
+		class="com.springtour.otg.infrastructure.channel.icbc.IcbcNotificationValidatorImpl">
+		<property name="configurations" ref="otg.Configurations" />
+	</bean>
+	
+	<bean id="otg.IcbcNotificationFactoryImpl"
+		class="com.springtour.otg.infrastructure.channel.icbc.IcbcNotificationFactoryImpl">
+		<constructor-arg value="${otg.channel.icbc.channelId}" />
+		<property name="transactionRepository" ref="otg.IBatisTransactionRepositoryImpl" />
+		<property name="notificationRepository" ref="otg.IBatisNotificationRepositoryImpl" />
+		<property name="clock" ref="otg.IBatisClockImpl" />
+		<property name="notificationValidator" ref="otg.IcbcNotificationValidator" />
+	</bean>
+	
+	<bean id="otg.IcbcExternalTransactionQueryObject"
+		class="com.springtour.otg.infrastructure.channel.icbc.IcbcExternalTransactionQueryObject">
+		<constructor-arg value="${otg.channel.icbc.channelId}" />
+		<property name="configurations" ref="otg.Configurations" />
+	</bean>
+	
+	<!-- 支付宝wap开始 -->
+	<bean id="otg.AlipayWapRequestWithoutCardServiceImpl"
+		class="com.springtour.otg.infrastructure.channel.alipaywap.AlipayWapRequestWithoutCardServiceImpl">
+		<constructor-arg value="${otg.channel.alipaywap.channelId}" />
+		<property name="assembler" ref="otg.AlipayWapRequestUrlAssembler" />
+	</bean>
+	
+	<bean id="otg.AlipayWapRequestUrlAssembler"
+		class="com.springtour.otg.infrastructure.channel.alipaywap.AlipayWapRequestUrlAssembler">
+		<property name="configurations" ref="otg.Configurations" />
+	</bean>
+	
+	<bean id="otg.AlipayWapNotificationFactoryImpl"
+		class="com.springtour.otg.infrastructure.channel.alipaywap.AlipayWapNotificationFactoryImpl">
+		<constructor-arg value="${otg.channel.alipaywap.channelId}" />
+		<property name="transactionRepository" ref="otg.IBatisTransactionRepositoryImpl" />
+		<property name="notificationRepository" ref="otg.IBatisNotificationRepositoryImpl" />
+		<property name="clock" ref="otg.IBatisClockImpl" />
+		<property name="notificationValidator" ref="otg.AlipayWapNotificationValidator" />
+	</bean>
+	
+	<bean id="otg.AlipayWapNotificationValidator"
+		class="com.springtour.otg.infrastructure.channel.alipaywap.AlipayWapNotificationValidatorImpl">
+		<property name="configurations" ref="otg.Configurations" />
+	</bean>
+	
+	<bean id="otg.AlipayWapNotificationAcknowledgerImpl"
+		class="com.springtour.otg.infrastructure.channel.alipaywap.AlipayWapNotificationAcknowledgerImpl">
+	</bean>
+	
+	<bean id="otg.AlipayWapExternalTransactionQueryObject"
+		class="com.springtour.otg.infrastructure.channel.alipaywap.AlipayWapExternalTransactionQueryObject">
+		<constructor-arg value="${otg.channel.alipaywap.channelId}" />
+		<property name="configurations" ref="otg.Configurations" />
+	</bean>
+	
+	<!-- 支付宝wap结束 -->
+	
+	<!-- 中国银联开始 -->
+	<bean id="otg.UpopRequestWithoutCardServiceImpl"
+		class="com.springtour.otg.infrastructure.channel.upop.UpopRequestWithoutCardServiceImpl">
+		<constructor-arg value="${otg.channel.upop.channelId}" />
+		<property name="assembler" ref="otg.UpopRequestUrlAssembler" />
+	</bean>
+	
+	<bean id="otg.UpopRequestUrlAssembler"
+		class="com.springtour.otg.infrastructure.channel.upop.UpopRequestUrlAssembler">
+		<property name="configurations" ref="otg.Configurations" />
+	</bean>
+	
+	<bean id="otg.UpopNotificationFactoryImpl"
+		class="com.springtour.otg.infrastructure.channel.upop.UpopNotificationFactoryImpl">
+		<constructor-arg value="${otg.channel.upop.channelId}" />
+		<property name="transactionRepository" ref="otg.IBatisTransactionRepositoryImpl" />
+		<property name="notificationRepository" ref="otg.IBatisNotificationRepositoryImpl" />
+		<property name="clock" ref="otg.IBatisClockImpl" />
+	</bean>
+	
+	<bean id="otg.UpopExternalTransactionQueryObject"
+		class="com.springtour.otg.infrastructure.channel.upop.UpopExternalTransactionQueryObject">
+		<constructor-arg value="${otg.channel.upop.channelId}" />
+		<property name="configurations" ref="otg.Configurations" />
+	</bean>
+	<!-- 中国银联结束 -->
+	
+	<!-- 招商银行开始 -->
+	
+	<bean id="otg.CmbRequestWithoutCardServiceImpl"
+		class="com.springtour.otg.infrastructure.channel.cmb.CmbRequestWithoutCardServiceImpl">
+		<constructor-arg value="${otg.channel.cmb.channelId}" />
+		<property name="assembler" ref="otg.CmbRequestUrlAssembler" />
+	</bean>
+	
+	<bean id="otg.CmbRequestUrlAssembler"
+		class="com.springtour.otg.infrastructure.channel.cmb.CmbRequestUrlAssembler">
+		<property name="configurations" ref="otg.Configurations" />
+	</bean>
+	
+	<bean id="otg.CmbNotificationFactoryImpl"
+		class="com.springtour.otg.infrastructure.channel.cmb.CmbNotificationFactoryImpl">
+		<constructor-arg value="${otg.channel.cmb.channelId}" />
+		<property name="transactionRepository" ref="otg.IBatisTransactionRepositoryImpl" />
+		<property name="notificationRepository" ref="otg.IBatisNotificationRepositoryImpl" />
+		<property name="clock" ref="otg.IBatisClockImpl" />
+		<property name="notificationValidator" ref="otg.CmbNotificationValidator" />
+	</bean>
+	
+	<bean id="otg.CmbTransactionNoGeneratorImpl"
+		class="com.springtour.otg.infrastructure.channel.cmb.CmbTransactionNoGeneratorImpl">
+		<constructor-arg value="${otg.channel.cmb.channelId}" />
+	</bean>
+	
+	<bean id="otg.CmbNotificationValidator"
+		class="com.springtour.otg.infrastructure.channel.cmb.CmbNotificationValidatorImpl">
+	</bean>
+	
+	<bean id="otg.CmbExternalTransactionQueryObject"
+		class="com.springtour.otg.infrastructure.channel.cmb.CmbExternalTransactionQueryObject">
+		<constructor-arg value="${otg.channel.cmb.channelId}" />
+		<property name="configurations" ref="otg.Configurations" />
+	</bean>
+	
+	<!-- 招商银行结束 -->
+	
+	<!-- 上海银行开始 -->
+	
+	<bean id="otg.BoshRequestWithoutCardServiceImpl"
+		class="com.springtour.otg.infrastructure.channel.bosh.BoshRequestWithoutCardServiceImpl">
+		<constructor-arg value="${otg.channel.bosh.channelId}" />
+		<property name="assembler" ref="otg.BoshRequestUrlAssembler" />
+	</bean>
+	
+	<bean id="otg.BoshRequestUrlAssembler"
+		class="com.springtour.otg.infrastructure.channel.bosh.BoshRequestUrlAssembler">
+		<property name="configurations" ref="otg.Configurations" />
+		<property name="encryption" ref="otg.BoshEncryption" />
+	</bean>
+	
+	<bean id="otg.BoshEncryption"
+		class="com.springtour.otg.infrastructure.channel.bosh.BoshEncryption">
+		<property name="configurations" ref="otg.Configurations" />
+	</bean>
+	
+	<bean id="otg.BoshNotificationFactoryImpl"
+		class="com.springtour.otg.infrastructure.channel.bosh.BoshNotificationFactoryImpl">
+		<constructor-arg value="${otg.channel.bosh.channelId}" />
+		<property name="transactionRepository" ref="otg.IBatisTransactionRepositoryImpl" />
+		<property name="notificationRepository" ref="otg.IBatisNotificationRepositoryImpl" />
+		<property name="clock" ref="otg.IBatisClockImpl" />
+		<property name="notificationValidator" ref="otg.BoshNotificationValidator" />
+	</bean>
+	
+	<bean id="otg.BoshNotificationValidator"
+		class="com.springtour.otg.infrastructure.channel.bosh.BoshNotificationValidatorImpl">
+		<property name="configurations" ref="otg.Configurations" />
+	</bean>
+	
+	<bean id="otg.BoshExternalTransactionQueryObject"
+		class="com.springtour.otg.infrastructure.channel.bosh.BoshExternalTransactionQueryObject">
+		<constructor-arg value="${otg.channel.bosh.channelId}" />
+		<property name="configurations" ref="otg.Configurations" />
+		<property name="encryption" ref="otg.BoshEncryption" />
+		<property name="validator" ref="otg.BoshNotificationValidator" />
+	</bean>
+	
+	<!-- 上海银行结束 -->
+	
+	<!-- 中国银行开始 -->
+	
+	<bean id="otg.BocRequestWithoutCardServiceImpl"
+		class="com.springtour.otg.infrastructure.channel.boc.BocRequestWithoutCardServiceImpl">
+		<constructor-arg value="${otg.channel.boc.channelId}" />
+		<property name="assembler" ref="otg.BocRequestUrlAssembler" />
+	</bean>	
+	
+	<bean id="otg.BocRequestUrlAssembler"
+		class="com.springtour.otg.infrastructure.channel.boc.BocRequestUrlAssembler">
+		<property name="configurations" ref="otg.Configurations" />
+	</bean>
+	
+	<bean id="otg.BocNotificationFactoryImpl"
+		class="com.springtour.otg.infrastructure.channel.boc.BocNotificationFactoryImpl">
+		<constructor-arg value="${otg.channel.boc.channelId}" />
+		<property name="transactionRepository" ref="otg.IBatisTransactionRepositoryImpl" />
+		<property name="notificationRepository" ref="otg.IBatisNotificationRepositoryImpl" />
+		<property name="clock" ref="otg.IBatisClockImpl" />
+		<property name="notificationValidator" ref="otg.BocNotificationValidator" />
+	</bean>
+	
+	<bean id="otg.BocNotificationValidator"
+		class="com.springtour.otg.infrastructure.channel.boc.BocNotificationValidatorImpl">
+		<property name="configurations" ref="otg.Configurations" />
+	</bean>
+	
+	<bean id="otg.BocExternalTransactionQueryObject"
+		class="com.springtour.otg.infrastructure.channel.boc.BocExternalTransactionQueryObject">
+		<constructor-arg value="${otg.channel.boc.channelId}" />
+		<property name="configurations" ref="otg.Configurations" />
+	</bean>
+	
+	<!-- 中国银行结束 -->
+	
+	<!-- 交通銀行开始 -->
+	<bean id="otg.BocommRequestWithoutCardServiceImpl"
+		class="com.springtour.otg.infrastructure.channel.bocomm.BocommRequestWithoutCardServiceImpl">
+		<constructor-arg value="${otg.channel.bocomm.channelId}" />
+		<property name="assembler" ref="otg.BocommRequestUrlAssembler" />
+	</bean>	
+	
+	<bean id="otg.BocommRequestUrlAssembler"
+		class="com.springtour.otg.infrastructure.channel.bocomm.BocommRequestUrlAssembler">
+		<property name="configurations" ref="otg.Configurations" />
+	</bean>
+	
+	<bean id="otg.BocommNotificationFactoryImpl"
+		class="com.springtour.otg.infrastructure.channel.bocomm.BocommNotificationFactoryImpl">
+		<constructor-arg value="${otg.channel.bocomm.channelId}" />
+		<property name="transactionRepository" ref="otg.IBatisTransactionRepositoryImpl" />
+		<property name="notificationRepository" ref="otg.IBatisNotificationRepositoryImpl" />
+		<property name="clock" ref="otg.IBatisClockImpl" />
+		<property name="notificationValidator" ref="otg.BocommNotificationValidator" />
+	</bean>
+	
+	<bean id="otg.BocommNotificationValidator"
+		class="com.springtour.otg.infrastructure.channel.bocomm.BocommNotificationValidatorImpl">
+		<property name="configurations" ref="otg.Configurations" />
+	</bean>
+	
+	<bean id="otg.BocommExternalTransactionQueryObject"
+		class="com.springtour.otg.infrastructure.channel.bocomm.BocommExternalTransactionQueryObject">
+		<constructor-arg value="${otg.channel.bocomm.channelId}" />
+		<property name="configurations" ref="otg.Configurations" />
+	</bean>
+	
+	<bean id="otg.BocommUtils"
+		class="com.springtour.otg.infrastructure.channel.bocomm.BocommUtils" init-method="init">
+		<property name="configurations" ref="otg.Configurations" />
+	</bean>
+	<!-- 交通银行结束 -->
+
+	<!-- 分发器 -->
+	<bean id="otg.ChannelDispatcher"
+		class="com.springtour.otg.infrastructure.channel.ChannelDispatcher">
+		<property name="requestWithCardInfoAdapters">
+			<list>
+				<ref bean="otg.ChinapnrRequestWithCardInfoAdapterImpl" />
+				<ref bean="otg.Bill99RequestWithCardInfoAdapterImpl" />
+			</list>
+		</property>
+		<property name="requestWithoutCardInfoAdapters">
+			<list>
+				<ref bean="otg.b2c.AlipayRequestWithoutCardInfoAdapterImpl" />
+				<ref bean="otg.b2b.AlipayRequestWithoutCardInfoAdapterImpl" />
+				<ref bean="otg.SpringCardRequestWithoutCardInfoAdapterImpl" />
+				<ref bean="otg.TenpayRequestWithoutCardServiceImpl" />
+				<ref bean="otg.Bill99GatewayRequestWithoutCardServiceImpl" />
+				<ref bean="otg.CcbRequestWithoutCardServiceImpl" />
+				<ref bean="otg.CcbInstallmentRequestWithoutCardServiceImpl" />
+				<ref bean="otg.CmbcRequestWithoutCardServiceImpl" />
+				<ref bean="otg.IcbcRequestWithoutCardServiceImpl" />
+				<ref bean="otg.Bill99PosRequestAdapter" />
+				<ref bean="otg.UpopRequestWithoutCardServiceImpl" />
+				<ref bean="otg.CmbRequestWithoutCardServiceImpl" />
+				<ref bean="otg.BoshRequestWithoutCardServiceImpl" />
+				<ref bean="otg.AlipayWapRequestWithoutCardServiceImpl" />
+				<ref bean="otg.BocommRequestWithoutCardServiceImpl" />
+				<ref bean="otg.BocRequestWithoutCardServiceImpl" />
+			</list>
+		</property>
+		<property name="abstractNotificationFactories">
+			<list>
+				<ref bean="otg.ChinapnrNotificationFactoryImpl" />
+				<ref bean="otg.Bill99NotificationFactoryImpl" />
+				<ref bean="otg.b2c.AlipayNotificationFactoryImpl" />
+				<ref bean="otg.b2b.AlipayNotificationFactoryImpl" />
+				<ref bean="otg.SpringCardNotificationFactoryImpl" />
+				<ref bean="otg.TenpayNotificationFactoryImpl" />
+				<ref bean="otg.Bill99GatewayNotificationFactoryImpl" />
+				<ref bean="otg.CcbNotificationFactoryImpl" />
+				<ref bean="otg.CcbInstallmentNotificationFactoryImpl" />
+				<ref bean="otg.CmbcNotificationFactoryImpl" />
+				<ref bean="otg.IcbcNotificationFactoryImpl" />
+				<ref bean="otg.Bill99PosNotificationFactoryImpl" />
+				<ref bean="otg.UpopNotificationFactoryImpl" />
+				<ref bean="otg.CmbNotificationFactoryImpl" />
+				<ref bean="otg.BoshNotificationFactoryImpl" />
+				<ref bean="otg.AlipayWapNotificationFactoryImpl" />
+				<ref bean="otg.BocommNotificationFactoryImpl" />
+				<ref bean="otg.BocNotificationFactoryImpl" />
+			</list>
+		</property>
+		<property name="channelExternalTransactionQueryObjectAdapters">
+			<list>
+				<ref bean="otg.b2b.AlipayExternalTransactionQueryObject" />
+				<ref bean="otg.b2c.AlipayExternalTransactionQueryObject" />
+				<ref bean="otg.TenpayExternalTransactionQueryObject" />
+				<ref bean="otg.CmbcExternalTransactionQueryObject" />
+				<ref bean="otg.IcbcExternalTransactionQueryObject"/>
+				<ref bean="otg.UpopExternalTransactionQueryObject"/>
+				<ref bean="otg.CmbExternalTransactionQueryObject"/>
+				<ref bean="otg.BoshExternalTransactionQueryObject"/>
+				<ref bean="otg.AlipayWapExternalTransactionQueryObject"/>
+				<ref bean="otg.BocommExternalTransactionQueryObject"/>
+				<ref bean="otg.BocExternalTransactionQueryObject"/>
+			</list>
+		</property>
+		<property name="abstractTransactionNoGeneratorMap">
+			<map>
+				<entry>
+					<key>
+						<value>17</value>
+					</key>
+					<ref bean="otg.CmbcTransactionNoGeneratorImpl" />
+				</entry>
+				<entry>
+					<key>
+						<value>32</value>
+					</key>
+					<ref bean="otg.CmbTransactionNoGeneratorImpl" />
+				</entry>
+			</map>
+		</property>
+		<property name="transactionNoGenerator" ref="otg.CommonTransactionNoGeneratorImpl" />
+		<property name="loggingSupport" ref="otg.Slf4jLoggingSupportImpl" />
+	</bean>
+
+	<bean id="otg.CommonTransactionNoGeneratorImpl"
+		class="com.springtour.otg.infrastructure.channel.CommonTransactionNoGeneratorImpl">
+	</bean>
+
+	<bean id="otg.TransactionCheckerImpl"
+		class="com.springtour.otg.infrastructure.channel.TransactionCheckerImpl">
+		<property name="externalTransactionQueryObject" ref="otg.ChannelDispatcher" />
+	</bean>
+
+</beans>

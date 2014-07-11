@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="GBK"?>
+
+<!--
+    Document   : PartnerDataForBill99HappyPath.xml
+    Created on : February 29, 2012, 10:13 AM
+    Author     : 005073
+    Description:
+        Purpose of the document follows.
+-->
+
+<root>
+    <data>
+        <id>1</id>
+        <name>移动</name>
+        <AVAILABLE_CHANNELS>15</AVAILABLE_CHANNELS>
+    </data>
+</root>

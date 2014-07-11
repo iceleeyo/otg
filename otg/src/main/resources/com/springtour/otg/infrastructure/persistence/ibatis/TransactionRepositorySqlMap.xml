@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap
+	namespace="com/springtour/otg/infrastructure/persistence/ibatis/TransactionRepositorySqlMap">
+
+	<select id="nextTransactionNoSeq" resultClass="String">
+		select
+		SEQ_PAY_SERIAL_NUMBER.nextval from dual
+	</select>
+
+	<resultMap id="listTransactionResultMap"
+		class="com.springtour.otg.domain.model.transaction.Transaction">
+		<result property="transactionId" column="id" />
+		<result property="transactionNo.number" column="transaction_No" />
+		<result property="version" column="version" />
+		<result property="amount.amount" column="amount" javaType="java.math.BigDecimal"
+			jdbcType="NUMBER" />
+		<result property="amount.currency.code" column="currency" />
+		<result property="state" column="state" />
+		<result property="checkingState" column="checking_state" />
+		<result property="updateTime" column="update_time" />
+		<result property="partner.id" column="partner_id" />
+		<result property="partner.name" column="partner_name" />
+		<result property="merchantCode" column="merchant_Code" />
+		<result property="merchant.id" column="merchant_id" />
+		<result property="merchant.code" column="mCode" />
+		<result property="merchant.name" column="merchant_name" />
+		<result property="channel.id" column="channel_Id" />
+		<result property="channel.name" column="channel_name" />
+		<result property="gateway" column="gate_way" />
+		<result property="whenRequested" column="when_Requested"
+			javaType="java.util.Date" jdbcType="java.sql.Time" />
+		<result property="whenConcluded" column="when_Concluded"
+			javaType="java.util.Date" jdbcType="java.sql.Time" />
+		<result property="orderId.orderId" column="order_Id" />
+		<result property="orderId.orderNo" column="order_no" />
+		<result property="orderId.application" column="application" />
+		<result property="transactionType" column="TRANSACTION_TYPE" />
+		<result property="referenceTransactionNumber" column="REFERENCE_TXN_NUMBER" nullValue=""/>
+		<result property="handlingActivity.notification.cardInfo"  column="CARD_INFO" nullValue=""/>
+		<result property="chargeFor" column="CHARGE_FOR" nullValue=""/>
+	</resultMap>
+
+	<resultMap id="detailTransactionResultMap"
+		class="com.springtour.otg.domain.model.transaction.Transaction">
+		<result property="transactionId" column="id" />
+		<result property="transactionNo.number" column="transaction_No" />
+		<result property="version" column="version" />
+		<result property="amount.amount" column="amount" javaType="java.math.BigDecimal"
+			jdbcType="NUMBER" />
+		<result property="amount.currency.code" column="currency" />
+		<result property="state" column="state" />
+		<result property="checkingState" column="checking_state" />
+		<result property="updateTime" column="update_time" />
+		<result property="partner" column="partner_id"
+			select="com/springtour/otg/infrastructure/persistence/ibatis/PartnerRepositorySqlMap.findById" />
+		<result property="merchantCode" column="merchant_Code" />
+		<result property="merchant" column="{channelId=channel_id,merchantCode=merchant_code}"
+			select="com/springtour/otg/infrastructure/persistence/ibatis/MerchantRepositorySqlMap.findKeyByCode" />
+		<result property="channel" column="channel_Id"
+			select="com/springtour/otg/infrastructure/persistence/ibatis/ChannelRepositorySqlMap.findById" />
+		<result property="gateway" column="gate_way" />
+		<result property="whenRequested" column="when_Requested"
+			javaType="java.util.Date" jdbcType="java.sql.Time" />
+		<result property="handlingActivity.whenHandled" column="when_Responsed"
+			javaType="java.util.Date" jdbcType="java.sql.Time" />
+		<result property="handlingActivity.notification" column="notification_seq"
+			nullValue=""
+			select="com/springtour/otg/infrastructure/persistence/ibatis/NotificationRepositorySqlMap.findBySequence" />
+		<result property="whenConcluded" column="when_Concluded"
+			javaType="java.util.Date" jdbcType="java.sql.Time" />
+		<result property="orderId.orderId" column="order_Id" />
+		<result property="orderId.orderNo" column="order_no" />
+		<result property="orderId.application" column="application" />
+		<result property="transactionType" column="TRANSACTION_TYPE" />
+		<result property="referenceTransactionNumber" column="REFERENCE_TXN_NUMBER" nullValue=""/>
+		<result property="chargeFor" column="CHARGE_FOR" nullValue=""/>
+	</resultMap>
+
+	<sql id="list_columns">
+		t.id, t.transaction_No, t.version,t.amount,
+		t.currency,t.state,
+		t.checking_state,
+		t.update_time,
+		t.partner_id,p.name as
+		partner_name, t.merchant_code,
+		m.id as merchant_Id,
+		m.merchant_code as
+		mcode,m.merchant_name as merchant_name,t.channel_id,
+		c.name as
+		channel_name, t.gate_way, t.when_Requested,
+		t.when_concluded,t.order_id,t.order_no,t.application,
+		t.TRANSACTION_TYPE,t.REFERENCE_TXN_NUMBER,
+		t.card_info,t.CHARGE_FOR
+	</sql>
+
+	<sql id="list_from">
+		from t_otg_transaction t,t_merchant m,t_otg_partner p,
+		t_otg_channel c
+		where t.merchant_code = m.merchant_code
+		and t.channel_id
+		= m.merchant_channel
+		and t.partner_id = p.id
+		and t.channel_id = c.id
+	</sql>
+	<sql id="find_by_id_where_clause">
+		and t.application = #application#
+		and t.order_id = #orderId#
+	</sql>
+	<sql id="order_by">order by t.id desc</sql>
+	<sql id="where_condition">
+		<isNotEmpty prepend="AND" property="transactionNoEq">
+			t.transaction_no=#transactionNoEq#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="orderNoEq">
+			t.order_no = #orderNoEq#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="orderIdEq">
+			t.order_id = #orderIdEq#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="applicationEq">
+			t.application =
+			#applicationEq#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="merchantCodeEq">
+			t.merchant_code=#merchantCodeEq#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="channelIdEq">
+			t.channel_id=#channelIdEq#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="channelIdIn">
+			<iterate property="channelIdIn" conjunction=","
+				open=" channel_id IN (" close=")">
+				#channelIdIn[]#
+			</iterate>
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="stateEq">
+			t.state=#stateEq#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="checkingStateEq">
+			t.checking_state=#checkingStateEq#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="whenRequestedGt">
+				<![CDATA[
+				to_char(t.WHEN_REQUESTED, 'yyyy-MM-dd') >=
+				to_char(#whenRequestedGt#,'yyyy-MM-dd') 
+				   ]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="whenRequestedLt">
+				<![CDATA[
+  				to_char(t.WHEN_REQUESTED,'yyyy-MM-dd') <=
+				to_char(#whenRequestedLt#,'yyyy-MM-dd') 
+				]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="transactionTypeEq">
+			t.transaction_type=#transactionTypeEq#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="referenceTxnNumberEq">
+			t.REFERENCE_TXN_NUMBER = #referenceTxnNumberEq#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="partnerEq">
+			t.PARTNER_ID = #partnerEq#
+		</isNotEmpty>
+	</sql>
+
+	<select id="findByOrderId" parameterClass="java.util.Map"
+		resultMap="listTransactionResultMap">
+
+		SELECT * FROM (SELECT t.*,ROWNUM rn FROM (
+		select
+		<include refid="list_columns" />
+		<include refid="list_from" />
+		<include refid="find_by_id_where_clause" />
+		<include refid="order_by" />
+		
+			<![CDATA[
+				) t WHERE ROWNUM < #firstResult# + #maxResults#)WHERE rn >= #firstResult#
+			]]>
+	</select>
+
+	<select id="countByOrderId" parameterClass="java.util.Map"
+		resultClass="java.lang.String">
+		select count(t.id)
+		<include refid="list_from" />
+		<include refid="find_by_id_where_clause" />
+	</select>
+
+
+	<select id="findSatisfying"
+		parameterClass="com.springtour.otg.infrastructure.persistence.TransactionCriteria"
+		resultMap="listTransactionResultMap">
+		<isEqual property="unpaged" compareValue="false">
+			SELECT * FROM (SELECT t.*,ROWNUM rn FROM (
+		</isEqual>
+		select
+		<include refid="list_columns" />
+		<include refid="list_from" />
+		<include refid="where_condition" />
+		<include refid="order_by" />
+		<isEqual property="unpaged" compareValue="false">
+			<![CDATA[
+				) t WHERE ROWNUM < #firstResult# + #maxResults#)WHERE rn >= #firstResult#
+			]]>
+		</isEqual>
+	</select>
+
+	<select id="countSatisfying" resultClass="java.lang.String"
+		parameterClass="com.springtour.otg.infrastructure.persistence.TransactionCriteria">
+		select count(1)
+		<include refid="list_from" />
+		<include refid="where_condition" />
+	</select>
+
+	<select id="findByTransactionNo" parameterClass="java.lang.String"
+		resultMap="detailTransactionResultMap">
+		select
+		t.id, t.transaction_No, t.version,t.amount,
+		t.currency,t.state,
+		t.checking_state,
+		t.update_time,
+		t.partner_id,
+		t.merchant_code,
+		t.channel_id,
+		t.gate_way, t.when_Requested, t.when_responsed, t.notification_seq,
+		t.when_concluded,t.order_id,t.order_no,t.application,
+		t.TRANSACTION_TYPE,t.REFERENCE_TXN_NUMBER,t.CHARGE_FOR
+		from
+		t_otg_transaction t
+		where 
+		t.transaction_No=#transactionNumber#
+	</select>
+
+	<insert id="insert2Transaction"
+		parameterClass="com.springtour.otg.domain.model.transaction.Transaction">
+		<selectKey resultClass="java.lang.Long" keyProperty="transactionId"
+			type="pre">
+			select SEQ_OTG_TRANSACTION.NEXTVAL as transactionId from dual
+		</selectKey>
+		INSERT INTO t_otg_transaction (id,version,amount,
+		transaction_No,
+		state,
+		when_Requested,order_Id,order_No,application,merchant_code,channel_id,currency,gate_way,partner_id,checking_state,update_time,TRANSACTION_TYPE,REFERENCE_TXN_NUMBER,CHARGE_FOR)
+		VALUES
+		(#transactionId#,#version#,#amount.amount#,#transactionNo.number#,#state#,#whenRequested#,#orderId.orderId#,#orderId.orderNo#,#orderId.application#,#merchantCode#,#channel.id#,#amount.currency.code#,#gateway#,#partner.id#,#checkingState#,#updateTime#,#transactionType#,#referenceTransactionNumber#,#chargeFor#)
+	</insert>
+
+	<update id="updateTransaction"
+		parameterClass="com.springtour.otg.domain.model.transaction.Transaction">
+		update t_otg_transaction t set t.version = t.version + 1
+		<isEqual prepend="," property="responsedUpdated" compareValue="true">
+			t.state = #state#, t.WHEN_RESPONSED=#handlingActivity.whenHandled#,
+			t.notification_seq = #handlingActivity.notification.sequence#,
+			t.card_info = #handlingActivity.notification.cardInfo#
+		</isEqual>
+		<isEqual prepend="," property="concludedUpdated" compareValue="true">
+			t.state = #state#, t.WHEN_CONCLUDED=#whenConcluded#
+		</isEqual>
+		<isEqual prepend="," property="checkingStateUpdated"
+			compareValue="true">
+			t.checking_state = #checkingState#,
+			t.update_time = #updateTime#
+		</isEqual>
+		<isEqual property="orderInfoUpdated" compareValue="true">
+			<isNotEmpty prepend="," property="orderId.orderId">
+				t.ORDER_ID = #orderId.orderId#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="orderId.orderNo">
+				t.ORDER_NO = #orderId.orderNo#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="orderId.application">
+				t.APPLICATION = #orderId.application#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="chargeFor">
+				t.CHARGE_FOR = #chargeFor#
+			</isNotEmpty>
+		</isEqual>
+		where t.id = #transactionId# and t.version = #version#
+	</update>
+</sqlMap>

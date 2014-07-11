@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap
+	namespace="com/springtour/otg/dbop/PartnerDataPrepareOperationDaoSqlMap">
+
+	<delete id="clear">
+               delete from chunqiu3.t_otg_partner
+        </delete>
+        
+        <delete id="clearData">
+               delete from chunqiu3.t_otg_partner where id =#id#
+        </delete>
+        
+        <insert id="createData" parameterClass="java.util.Map">
+            insert into chunqiu3.t_otg_partner (id, NAME, AVAILABLE_CHANNELS)
+            values (#id#, #name#, #AVAILABLE_CHANNELS#)
+        </insert>
+</sqlMap>

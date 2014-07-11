@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+    <bean name="otg.TransactingServiceFacadeImpl"
+		class="com.springtour.otg.interfaces.transacting.facade.internal.TransactingServiceFacadeImpl">
+        <property name="transactingService" ref="otg.TransactingServiceImpl" />               
+        <property name="requestAdapter" ref="otg.ChannelDispatcher"/>
+        <property name="requestWithoutCardInfoAdapter" ref="otg.ChannelDispatcher"/>
+        <property name="partnerRepository" ref="otg.IBatisPartnerRepositoryImpl" />
+        <property name="channelRepository" ref="otg.IBatisChannelRepositoryImpl" />
+    </bean>
+    
+    <bean name="otg.RequestHandlerFacadeImpl"
+		class="com.springtour.otg.interfaces.transacting.facade.internal.RequestHandlerFacadeImpl">
+        <property name="transactingService" ref="otg.TransactingServiceImpl" />               
+        <property name="requestAdapter" ref="otg.ChannelDispatcher"/>
+        <property name="requestWithoutCardInfoAdapter" ref="otg.ChannelDispatcher"/>
+        <property name="partnerRepository" ref="otg.IBatisPartnerRepositoryImpl" />
+        <property name="channelRepository" ref="otg.IBatisChannelRepositoryImpl" />
+         <property name="transactionRepository" ref="otg.IBatisTransactionRepositoryImpl" />
+    </bean>
+
+    <bean name="otg.ChinapnrVoicePayTransactingServiceFacadeImpl"
+		class="com.springtour.otg.interfaces.transacting.facade.internal.ChinapnrVoicePayTransactingServiceFacadeImpl">
+        <property name="transactionRepository" ref="otg.IBatisTransactionRepositoryImpl" />
+        <property name="voicePayHttpClient" ref="otg.ChinapnrRequestWithCardInfoAdapterImpl" />
+    </bean>
+
+
+    <bean name="otg.PartnerAdminServiceFacadeImpl"
+		class="com.springtour.otg.interfaces.admin.facade.internal.PartnerAdminServiceFacadeImpl">
+        <property name="partnerRepository" ref="otg.IBatisPartnerRepositoryImpl" />
+        <property name="channelRepository" ref="otg.IBatisChannelRepositoryImpl" />
+        <property name="partnerAdminService" ref="otg.PartnerAdminServiceImpl" />
+    </bean>
+    
+    <bean name="otg.ChannelAdminServiceFacadeImpl"
+		class="com.springtour.otg.interfaces.admin.facade.internal.ChannelAdminServiceFacadeImpl">
+        <property name="channelRepository" ref="otg.IBatisChannelRepositoryImpl" />
+        <property name="channelAdminService" ref="otg.ChannelAdminServiceImpl" />
+    </bean>
+    
+    <bean name="otg.TransactionAdminServiceFacadeImpl"
+		class="com.springtour.otg.interfaces.admin.facade.internal.TransactionAdminServiceFacadeImpl">
+        <property name="responseProcedure" ref="otg.ResponseProcedure" />
+        <property name="notificationService" ref="otg.NotificationServiceImpl" />
+        <property name="transactionRepository" ref="otg.IBatisTransactionRepositoryImpl" />
+         <property name="notificationRepository" ref="otg.IBatisNotificationRepositoryImpl" />
+    </bean>
+    
+    <bean name="otg.MerchantAdminServiceFacadeImpl"
+		class="com.springtour.otg.interfaces.admin.facade.internal.MerchantAdminServiceFacadeImpl">
+         <property name="merchantAdminService" ref="otg.MerchantAdminServiceImpl" />
+         <property name="merchantRepository" ref="otg.IBatisMerchantRepositoryImpl" />
+    </bean>
+    
+    <bean name="otg.AutoCheckingBatchFacadeImpl"
+		class="com.springtour.otg.interfaces.transacting.facade.internal.AutoCheckingBatchFacadeImpl">
+         <property name="checkingBatch" ref="otg.CheckingBatch" />
+    </bean>
+</beans>

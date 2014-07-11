@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="GBK"?>
+
+<root>
+    <data>
+        <ID>
+            99999999
+        </ID>  
+        <TRANSACTION_NO>
+            2011042709016612
+        </TRANSACTION_NO>
+        <VERSION>
+            1
+        </VERSION> 
+        <STATE>
+            3
+        </STATE>
+        <AMOUNT>
+            100.52
+        </AMOUNT>
+        <CURRENCY>
+            CNY
+        </CURRENCY>
+        <WHEN_REQUESTED>
+            2011-04-27 14:23:55
+        </WHEN_REQUESTED>
+        <WHEN_RESPONSED>
+           2011-04-27 14:23:55
+        </WHEN_RESPONSED>
+        <NOTIFICATION_SEQ>
+            99999998
+        </NOTIFICATION_SEQ>
+        <WHEN_CONCLUDED>
+            2011-04-27 14:23:56
+        </WHEN_CONCLUDED>
+        <ORDER_ID>
+            123456
+        </ORDER_ID>
+        <APPLICATION>
+            1
+        </APPLICATION>
+        <ORDER_NO>
+            order_no
+        </ORDER_NO>
+        <MERCHANT_CODE>
+            870437
+        </MERCHANT_CODE>
+        <CHANNEL_ID>
+            12
+        </CHANNEL_ID>
+        <GATE_WAY>
+            CCB
+        </GATE_WAY>
+        <PARTNER_ID>
+            1
+        </PARTNER_ID>
+    </data>
+</root>

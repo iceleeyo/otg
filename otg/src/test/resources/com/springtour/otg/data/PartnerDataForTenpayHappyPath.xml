@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="GBK"?>
+
+<!--
+    Document   : PartnerDataForTenpayHappyPath.xml
+    Created on : February 23, 2012, 3:31 PM
+    Author     : 005073
+    Description:
+        Purpose of the document follows.
+-->
+
+<root>
+    <data>
+        <id>1</id>
+        <name>电话支付</name>
+        <AVAILABLE_CHANNELS>5,12</AVAILABLE_CHANNELS>
+    </data>
+    <data>
+        <id>2</id>
+        <name>代理商</name>
+        <AVAILABLE_CHANNELS>5,9</AVAILABLE_CHANNELS>
+    </data>
+    <data>
+        <id>3</id>
+        <name>移动</name>
+        <AVAILABLE_CHANNELS>12,15</AVAILABLE_CHANNELS>
+    </data>
+    <data>
+        <id>4</id>
+        <name>网站</name>
+        <AVAILABLE_CHANNELS>1,2,4,5,6,7</AVAILABLE_CHANNELS>
+    </data>
+</root>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="GBK"?>
+
+<!--
+    Document   : ChannelDataForChannelSadPath.xml
+    Created on : February 23, 2012, 11:11 AM
+    Author     : 005073
+    Description:
+        Purpose of the document follows.
+-->
+
+<root>
+    <data>
+        <id>
+            7
+        </id>  
+        <name>
+             支付宝B2C 
+        </name>
+        <AVAILABLE_CURRENCIES>
+            CNY
+        </AVAILABLE_CURRENCIES>
+    </data>
+</root>

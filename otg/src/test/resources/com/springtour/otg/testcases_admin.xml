@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+    
+     
+    
+    <bean name="otg.ChannelAdminDataBuilder"
+		class="com.springtour.otg.dbop.DataPrepareOperation">
+        <property name="dataReader"
+			ref="otg.DataReader" />    
+        <property name="appendDataFilePath">
+            <list>
+                <value>/com/springtour/otg/data/ChannelAdmin-channel.xml</value>
+            </list>
+        </property>
+        <property name="appendDao">
+            <list>
+                <ref bean="otg.ChannelDataPrepareOperationDao"/>
+            </list>
+        </property>
+        <property name="dataFilePath">
+            <list>
+                <value>/com/springtour/otg/data/ChannelAdmin-gateway.xml</value>
+            </list>
+        </property>
+        <property name="dao">
+            <list>
+                <ref bean="otg.GatewayDataPrepareOperationDao"/>
+            </list>
+        </property>
+    </bean>
+    
+    <bean name="otg.PartnerAdminDataBuilder"
+		class="com.springtour.otg.dbop.DataPrepareOperation">
+        <property name="dataReader"
+			ref="otg.DataReader" />    
+        <property name="appendDataFilePath">
+            <list>
+                <value>/com/springtour/otg/data/ChannelAdmin-channel.xml</value>
+                <value>/com/springtour/otg/data/PartnerDataForTenpayHappyPath.xml</value>                
+            </list>
+        </property>
+        <property name="appendDao">
+            <list>
+                <ref bean="otg.ChannelDataPrepareOperationDao"/>
+                <ref bean="otg.PartnerDataPrepareOperationDao"/>
+            </list>
+        </property>
+        <property name="dataFilePath">
+            <list>
+                <value>/com/springtour/otg/data/ChannelAdmin-gateway.xml</value>
+                <value>/com/springtour/otg/data/PartnerAdmin-recommended.xml</value>
+            </list>
+        </property>
+        <property name="dao">
+            <list>
+                <ref bean="otg.GatewayDataPrepareOperationDao"/>
+                <ref bean="otg.RecommendedGatewayDataPrepareOperationDao"/>
+            </list>
+        </property>
+    </bean>
+</beans>

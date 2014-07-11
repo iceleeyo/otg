@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="GBK"?>
+
+<!--
+    Document   : MerchantDataForOrganizationSadPath.xml
+    Created on : February 23, 2012, 1:25 PM
+    Author     : 005073
+    Description:
+        Purpose of the document follows.
+-->
+
+<root>
+    <data>
+        <merchant_name>
+            上海春秋国旅(总社)
+        </merchant_name>
+        <merchant_code>
+            chujing@china-sss.com
+        </merchant_code>
+        <merchant_branch_id>
+            61
+        </merchant_branch_id>
+        <merchant_channel>
+            7
+        </merchant_channel>
+        <MERCHANT_HOLDER>
+            上海春秋国旅(总社)
+        </MERCHANT_HOLDER>
+        <merchant_key>
+            ahmibnzz0njr1xj9laxrthtf2vl933tk
+        </merchant_key>
+        <enabled>
+            1
+        </enabled>
+    </data>
+</root>

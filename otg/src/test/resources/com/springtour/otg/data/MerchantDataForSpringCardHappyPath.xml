@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="GBK"?>
+
+<!--
+    Document   : MerchantDataForSpringCardHappyPath.xml
+    Created on : February 23, 2012, 3:20 PM
+    Author     : 005073
+    Description:
+        Purpose of the document follows.
+-->
+
+<root>
+    <data>
+        <merchant_name>
+            上海春秋国旅(总社)
+        </merchant_name>
+        <merchant_code>
+            888880222220004
+        </merchant_code>
+        <merchant_branch_id>
+            61
+        </merchant_branch_id>
+        <merchant_channel>
+            2
+        </merchant_channel>
+        <MERCHANT_HOLDER>
+            上海春秋国旅(总社)
+        </MERCHANT_HOLDER>
+        <merchant_key>
+            01lh31
+        </merchant_key>
+        <enabled>
+            1
+        </enabled>
+    </data>
+</root>

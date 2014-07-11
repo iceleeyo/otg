@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MasMessage xmlns="http://www.99bill.com/mas_cnp_merchant_interface"><version>1.0</version><TxnMsgContent><txnType>PUR</txnType><interactiveStatus>TR4</interactiveStatus><merchantId>10611006511000290</merchantId><terminalId>10101061</terminalId><refNumber>131231312312</refNumber></TxnMsgContent></MasMessage>

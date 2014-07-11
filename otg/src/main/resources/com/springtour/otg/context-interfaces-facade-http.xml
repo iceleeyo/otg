@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+    <!-- http invoke -->
+    <bean id="otg.HttpInvokerTransactingServiceFacadeImpl" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+        <property name="service">
+            <ref bean="otg.TransactingServiceFacadeImpl" />
+        </property>
+        <property name="serviceInterface">
+            <value>com.springtour.otg.interfaces.transacting.facade.TransactingServiceFacade</value>
+        </property>
+    </bean>
+    
+    <!-- http invoke -->
+    <bean id="otg.HttpInvokerRequestHandlerFacadeImpl" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+        <property name="service">
+            <ref bean="otg.RequestHandlerFacadeImpl" />
+        </property>
+        <property name="serviceInterface">
+            <value>com.springtour.otg.interfaces.transacting.facade.RequestHandlerFacade</value>
+        </property>
+    </bean>
+    
+    <!-- http invoke -->
+    <bean id="otg.HttpInvokerResendMessageServiceImpl" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+        <property name="service">
+            <ref bean="otg.ResendMessageServiceImpl" />
+        </property>
+        <property name="serviceInterface">
+            <value>com.springtour.otg.application.ResendMessageService</value>
+        </property>
+    </bean>
+    
+    <!-- http invoke -->
+    <bean id="otg.HttpAutoCheckingBatchFacadeImpl"
+		class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service">
+			<ref bean="otg.AutoCheckingBatchFacadeImpl" />
+		</property>
+		<property name="serviceInterface">
+			<value>com.springtour.otg.interfaces.transacting.facade.AutoCheckingBatchFacade
+			</value>
+		</property>
+	</bean>
+    
+    <bean id="otg.HttpInvokerUrlHandlerMapping"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>                
+                <prop key="/remote/otg/transactingServiceFacade.htm">
+                    otg.HttpInvokerTransactingServiceFacadeImpl
+                </prop>
+                <prop key="/remote/otg/requestHandlerFacade.htm">
+                    otg.HttpInvokerRequestHandlerFacadeImpl
+                </prop>
+                <prop key="/remote/resendMessageService.htm">
+                    otg.HttpInvokerResendMessageServiceImpl
+                </prop>
+                <prop key="/remote/otg/AutoCheckingBatchService.htm">
+                    otg.HttpAutoCheckingBatchFacadeImpl
+                </prop>
+            </props>
+        </property>
+    </bean>
+    
+    
+</beans>
